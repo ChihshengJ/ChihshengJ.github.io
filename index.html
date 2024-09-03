@@ -1,1 +1,173 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Website</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mediaqueries.css">
+</head>
+<body>
+    <header class="site-header">
+            <div class="wrapper">
+                <div class="logo">Chihsheng Jin</div>
+                <nav id="desktop-nav">
+                <div>
+                    <ul class="nav-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="/other">Other</a></li>
+                    </ul>
+                </div>
+                </nav>
+                <nav id="hamburger-nav">
+                <div class="hamburger-menu">
+                    <div class="hamburger-icon" onclick="toggleMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="menu-links">
+                        <li><a href="#about" onclick="toggleMenu()">About</a></li>
+                        <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+                        <li><a href="" onclick="toggleMenu()">Other</a></li>
+                    </div>
+                </div>
+                </nav>
+            </div>
+    </header>
+    <section id="profile">
+        <div class="wrapper">
+            <div class="section__text">
+                <p><img src="./assets/profile-pic.JPG" alt="Profile Pic" class="profile_pic"></p>
+                <p>Hello! I'm Chihsheng Jin ([ʒɯ ʃəŋ]). I'm a second-year Master's student in Computational Linguistics at the University of Rochester. In 2023, I received my Bachelor's degree in Chinese Language at Fudan University, where I was advised by <a href="https://www.linkedin.com/in/yu-fu-chien-084913210">Prof. Yufu Chien</a>. I've also received an Associate degree in French from Shanghai Internaltional Studies University in 2022. I'm interested in psycholinguistics, language models, and information extraction. </br> Currently I'm being advised by <a href="">Prof. Aaron White</a> and working in the <a href="http://factslab.io">Facts Lab</a>.</br>And you can check out my CV <a href="./assets/CV_v2.5.pdf">here</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-desktop">
+        <div class="wrapper">
+        <div class="contact-info-upper-container">
+          <div class="contact-info-container">
+            <img
+              src="./assets/email.png"
+              alt="Email icon"
+              class="icon contact-icon email-icon"
+            />
+            <p><a href="mailto:chihsheng3421@gmail.com">chihsheng3421@gmail.com</a></p>
+          </div>
+          <div class="contact-info-container">
+            <img
+              src="./assets/linkedin.png"
+              alt="LinkedIn icon"
+              class="icon contact-icon"
+            />
+            <p><a href="https://www.linkedin.com/in/chihsheng-jin-43296928a">LinkedIn</a></p>
+          </div>
+          <div class="contact-info-container">
+            <img
+              src="./assets/github.png"
+              alt="Github icon"
+              class="icon contact-icon"
+            />
+            <p><a href="https://github.com/ChihshengJ">Github</a></p>
+          </div>
+        </div>
+        </div>
+    </section>
+
+    <section id="contact-mobile">
+        <div class="contact-mob-info-upper-container">
+          <div class="contact-mob-info-container">
+            <a href="mailto:chihsheng3421@gmail.com">
+            <img
+              src="./assets/email.png"
+              alt="Email icon"
+              class="contact-mob-icon email-icon"
+            />
+            </a>
+          </div>
+          <div class="contact-mob-info-container">
+            <a href="https://www.linkedin.com/in/chihsheng-jin-43296928a">
+            <img
+              src="./assets/linkedin.png"
+              alt="LinkedIn icon"
+              class="contact-mob-icon"
+            />
+            </a>
+          </div>
+          <div class="contact-mob-info-container">
+            <a href="https://github.com/ChihshengJ">
+            <img
+              src="./assets/github.png"
+              alt="Github icon"
+              class="contact-mob-icon"
+            />
+            </a>
+          </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h1 class="title">Experience</h1>
+            <div class="about-containers">
+                <div class="details-container">
+                    <h2 class="experience-sub-title">Projects</h2>
+                    <div class="article-container">
+                        <article>
+                            <div class="article-container">
+                                <h3>Agenda-based Parser for Multiple Context-free Grammars <a href="https://github.com/ChihshengJ/MCFG-parser">[Github]</a></h3>
+                                <p>This is an agenda-based parsing Python module for multiple context-free grammars a full test suite implemented in Pytest. Multiple context-free grammar is a class of grammar that is strictly more expressive than context-free grammar.</p>
+                            </div>
+                            <div class="article-container">
+                                <h3>Dynamics in the phonological encoding of bilingual speech production <a href="./assets/Thesis Chihsheng Jin.pdf">[pdf]</a></h3>
+                                <p>This is my undergraduate thesis. I used a picture-naming paradigm to test whether the phonological mapping status of cognates in Mandarin and Shanghai Dialect would take an effect on the speech production process and found a cognate facilitation effect when the phonological forms of the cognates match the basic mapping rules regardless of the discrepancy of their phonetic forms.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="details-container">
+                    <h2 class="experience-sub-title">Skills</h2>
+                    <div class="article-container">
+                        <article id="skills-article">
+                            <div class="skills-container">
+                                <h3>Programming Languages</h3>
+                                <p>Python (ML and NLP toolkits),</br> C++, R, Haskell</p>
+                            </div>
+                            <div class="skills-container">
+                                <h3>Prodcution Softwares</h3>
+                                <p>Photoshop, Indesign, Ableton Live, Lightroom, Praat, Audition</p>
+                            </div>
+                            <div class="skills-container">
+                                <h3>If you are interested in my other interests check out <a href="/other">this page</a>!</h3>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="details-container">
+                    <h2 class="experience-sub-title">Employment</h2>
+                    <div class="article-container">
+                        <article>
+                            <div>
+                                <h3>Shanghai AI Lab</h3>
+                                <p>Jun 2022 - Oct 2022</p>
+                                <p>I worded as a project management intern and used my coding skills to process files, which made our workflow more efficent.</p>
+                            </div>
+                            <div>
+                                <h3>Fudan Yayan</h3>
+                                <p>Jun 2020 - Sep 2022</p>
+                                <p>Fudan Yayan is bimonthly in-house newspaper dedicated to news on language regulations and language research in Fudan University. I worked as a chief editor and designer there for tow years. You can check out our works <a href="">here</a> (I'm sorry that the contents are in Chinese and we don't upload the complete issues online).</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+        </div>
+        <img src="./assets/arrow.png" alt="Arrow Icon" class="icon arrow" onclick="location.href='./#skills'">
+    </section>
+
+    <footer>
+        <p>Thank you for scrolling down here!</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
