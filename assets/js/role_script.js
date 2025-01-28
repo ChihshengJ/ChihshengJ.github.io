@@ -812,6 +812,7 @@ var CandidateListView = Backbone.View.extend({
   events: {
     "click button.clickable": "onClick",
     "click button.add_candidate_btn": "onAddCandidate",
+    "click button.submit-custom-candidate": "onSubmitCustomCandidate",
   },
 
   onAddCandidate: function () {
@@ -877,6 +878,39 @@ var CandidateListView = Backbone.View.extend({
     this.model.trigger("change");
   },
 
+  // select the custom span
+  onSubmitCustomCandidate: function (event) {
+    var customText = this.$("#direct-candidate-input").val().trim();
+    if (customText) {
+      var showPassage = this.model.attributes.showPassage;
+      var activeRoleIndex = showPassage
+        ? this.model.attributes.activeRoleIndexPassage
+        : this.model.attributes.activeRoleIndexSource;
+      var activeRoleSpan = showPassage
+        ? this.model.attributes.activePassageAnswerSpans[activeRoleIndex]
+        : this.model.attributes.activeSourceAnswerSpans[activeRoleIndex];
+
+      var customSpan = {
+        endToken: activeRoleSpan.endToken,
+        startToken: activeRoleSpan.startToken,
+        sentenceIndex: activeRoleSpan.sentenceIndex,
+        text: customText,
+        isCustom: true,
+      };
+
+      if (showPassage) {
+        this.model.attributes.passageCandidateSpans.push(customSpan);
+      } else {
+        this.model.attributes.sourceCandidateSpans.push(customSpan);
+      }
+
+      this.$("#direct-candidate-input").val("");
+
+      // Trigger model update
+      this.model.trigger("change");
+    }
+  },
+
   // select a given candidate using numeric keys
   selectCandidateByKey: function (key) {
     var keyInt = parseInt(key);
@@ -893,8 +927,9 @@ var CandidateListView = Backbone.View.extend({
       }
     }
   },
+
   // select a candidate using a given start token and end token
-  selectCandidate: function (startToken, endToken) {
+  selectCandidate: function (startToken, endToken, text, isCustom) {
     var showPassage = this.model.attributes.showPassage;
     var activeFrameIndex = this.model.attributes.activeFrameIndex;
     if (showPassage) {
@@ -903,8 +938,10 @@ var CandidateListView = Backbone.View.extend({
       var activeRoleIndex = this.model.attributes.activeRoleIndexSource;
     }
 
+    var customStatus = isCustom ? true : false;
+
     // when no candidate is present
-    if (startToken === -1 || endToken === -1) {
+    if (isCustom === undefined && (startToken === -1 || endToken === -1)) {
       // notPresent toggles to True from the default False value
       var notPresent = this.model.toggleNotPresent(activeRoleIndex);
       if (notPresent) {
@@ -931,6 +968,11 @@ var CandidateListView = Backbone.View.extend({
         this.model.attributes.activePassageAnswerSpans[
           activeRoleIndex
         ].endToken = endToken;
+        this.model.attributes.activePassageAnswerSpans[activeRoleIndex].text =
+          text;
+        this.model.attributes.activePassageAnswerSpans[
+          activeRoleIndex
+        ].isCustom = customStatus;
       } else {
         this.model.attributes.activeSourceAnswerSpans[
           activeRoleIndex
@@ -938,16 +980,23 @@ var CandidateListView = Backbone.View.extend({
         this.model.attributes.activeSourceAnswerSpans[
           activeRoleIndex
         ].endToken = endToken;
+        this.model.attributes.activeSourceAnswerSpans[activeRoleIndex].text =
+          text;
+        this.model.attributes.activeSourceAnswerSpans[
+          activeRoleIndex
+        ].isCustom = customStatus;
       }
     }
     this.model.trigger("change");
   },
 
-  //
   onClick: function (event) {
     var startToken = $(event.currentTarget).data("start_token");
     var endToken = $(event.currentTarget).data("end_token");
-    this.selectCandidate(startToken, endToken);
+    var spanText = $(event.currentTarget).data("text");
+    var isCustom = $(event.currentTarget).data("isCustom");
+
+    this.selectCandidate(startToken, endToken, spanText, isCustom);
   },
 
   render: function () {
@@ -977,6 +1026,22 @@ var CandidateListView = Backbone.View.extend({
       var sentences = this.model.attributes.sourceSentences;
       this.$el.append($("<h5>").text("Valid Overlapping Candidates in Source"));
     }
+
+    // Add text input form for direct candidate entry
+    var inputForm = $("<div>").addClass("candidate-input-form mb-3");
+    var textInput = $("<input>")
+      .addClass("form-control mb-2")
+      .attr("type", "text")
+      .attr("placeholder", "Paste from Plain Text...")
+      .attr("id", "direct-candidate-input");
+
+    var submitButton = $("<button>")
+      .addClass("btn btn-primary submit-custom-candidate")
+      .attr("type", "button")
+      .text("Add Custom Candidate");
+
+    inputForm.append(textInput, submitButton);
+    this.$el.append(inputForm);
 
     var index = 1;
     if (activeRoleSpan.status === AnswerSpanStatus.NOT_SELECTED) {
@@ -1033,6 +1098,11 @@ var CandidateListView = Backbone.View.extend({
 
         for (var candidateSpan of relevantCandidateSpans) {
           var usableIndex = 0 < index && index < 10;
+          var spanText = candidateSpan.isCustom
+            ? candidateSpan.text
+            : this.model.getSpanText(sentences, candidateSpan);
+
+          //adding buttons for candidate selection
           this.$el.append(
             $("<button>")
               .addClass("btn wrap_btn text-left clickable")
@@ -1045,10 +1115,9 @@ var CandidateListView = Backbone.View.extend({
               .data("start_token", candidateSpan.startToken)
               .data("end_token", candidateSpan.endToken)
               .data("index", usableIndex ? index : -1)
-              .text(
-                (usableIndex ? "(" + index + ") " : "") +
-                  this.model.getSpanText(sentences, candidateSpan),
-              ),
+              .data("text", spanText)
+              .data("isCustom", candidateSpan.isCustom)
+              .text((usableIndex ? "(" + index + ") " : "") + spanText),
           );
           ++index;
         }
@@ -1484,11 +1553,13 @@ var RoleView = Backbone.View.extend({
       var roles = this.model.attributes.activeRolesPassage;
       var activeRole = roles[activeRoleIndex];
       var answerSpans = this.model.attributes.activePassageAnswerSpans;
-      var activeAnswerSpanText = this.model.getAnswerSpanText(
-        answerSpans,
-        activeRoleIndex,
-        (capped = true),
-      );
+      var activeAnswerSpanText = activeRoleSpan.isCustom
+        ? activeRoleSpan.text
+        : this.model.getAnswerSpanText(
+            answerSpans,
+            activeRoleIndex,
+            (capped = true),
+          );
     } else {
       var sentences = this.model.get("sourceSentences");
       var activeFrameIndex = this.model.get("activeFrameIndex");
@@ -1503,12 +1574,16 @@ var RoleView = Backbone.View.extend({
       var roles = this.model.attributes.activeRolesSource;
       var activeRole = roles[activeRoleIndex];
       var answerSpans = this.model.attributes.activeSourceAnswerSpans;
-      var activeAnswerSpanText = this.model.getAnswerSpanText(
-        answerSpans,
-        activeRoleIndex,
-        (capped = true),
-      );
+      var activeAnswerSpanText = activeRoleSpan.isCustom
+        ? activeRoleSpan.text
+        : this.model.getAnswerSpanText(
+            answerSpans,
+            activeRoleIndex,
+            (capped = true),
+          );
     }
+
+    console.log("sole view span text: " + activeAnswerSpanText);
 
     // ***********  Active Role Div starts **************** //
     var statusRoleDiv = $("<div>")
@@ -2035,6 +2110,18 @@ function toggle_role_passage() {
 function toggle_role_source() {
   var ele = document.getElementById("examples_roles_source");
   var text = document.getElementById("displaytext_roles_source");
+  if (ele.style.display != "none") {
+    ele.style.display = "none";
+    text.innerHTML = "(show)";
+  } else {
+    ele.style.display = "block";
+    text.innerHTML = "(hide)";
+  }
+}
+
+function toggle_edge_cases() {
+  var ele = document.getElementById("example_edge_cases");
+  var text = document.getElementById("displaytext_edge_cases");
   if (ele.style.display != "none") {
     ele.style.display = "none";
     text.innerHTML = "(show)";

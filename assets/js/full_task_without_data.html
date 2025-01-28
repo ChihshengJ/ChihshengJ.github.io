@@ -214,7 +214,7 @@
 
         <!-- begin instructions -->
     <div id="instructions" class="ps-5 pe-5 pt-3 pb-3 collapse">
-        <span class="announcement">Updated instructions as of Jun 23, 2023 (<span style="color:red">*new annotated examples added).</span></span>
+        <span class="announcement">Updated instructions as of Jan 28, 2025 (<span style="color:red">*new annotated examples added).</span></span>
         <p>
             In this task, we give you a <span class="btn token btn-event font-weight-bold">highlighted</span> word or phrase in a <b>Passage Text</b>. The highlighted phrase refers to some kind of situation -- for example, a dynamic event (like running or kicking) or a state of being (like happiness or redness). We also give you the <b>Source Text</b> from which this Passage was taken. The Passage text is essentially a summary of some situation from the Source Text<b></b>. We then ask you to do the following:
             <ol>
@@ -348,7 +348,7 @@
                 </p>
                 <!-- 2.1 Role Annotation Examples -->
                 <p></p>
-                <h3>2.1 Role Annotation Examples </h4>
+                <h3>2.1 Role Annotation Examples </h3>
 
                 <p> To identify the word or phrase for the active role, you may select words by clicking and dragging your mouse pointer over the words making up the answer for that role.</p>
 
@@ -535,16 +535,35 @@
                 <p>The rest of the roles can be annotated in a similar fashion to that of Passage Text.</p>
             </div>
 
+          <!-- ###################################### -->
+          <!-- 4. Edge Cases in Selecting Spans -->
+          <!-- ###################################### -->
+
+             <h2>4. Handling Edge Cases in Selecting Spans <a href="javascript:toggle_edge_cases();" id="displaytext_edge_cases" style="font-size: 80%;">(hide)</a></h2>
+
+             <div id="example_edge_cases">
+              <p>Due to some technical artifacts of our backend, some spans are not selectable in certain senarios, so you would need to interact with the type-in bar at the top of the list of the candidate spans on the right side of the screen, as shown in the following example:</p>
+              <img src="./assets/location.png" alt="location of the type-in bar" width="900" style="display: block; margin: 0 auto; margin-bottom: 20px"> 
+              <p>To be more specific, most of the edge cases are like this: you are selecting a span, but somehow, you can't select the whole thing but only a part of it, and the part that can be selected does not have sufficient information for it be selected as a span for the role. THe following picture illustrates a typical case. That's when you need to do as follows.</p>
+              <img src="./assets/senario.png" alt="a typical senario" width="900" style="display: block; margin: 0 auto; margin-bottom: 20px">
+              <p>First, please keep the partial span selected, and click on the plain text button.</p>
+              <img src="./assets/plaintext.png" alt="toggle plain text btn" width="900" style="display: block; margin: 0 auto; margin-bottom: 20px">
+              <p>After that, the plain text version of both passage text and source text would be in the block. You can select and copy the complete span you have in mind, and click the text you were working on (Source Text in our case).</p>
+             <img src="./assets/copy.png" alt="copy the text" width="900" style="display: block; margin: 0 auto; margin-bottom: 20px">
+             <p>Then, paste what you've copied into the type-in bar and click the <b>Add Custom Candidate</b> button to put the span into the list of valid candidates. After that, click on the span you put into the list, and it will appear as the <b>Answer</b> for that role, which indicates that you've successfully annotated this role with the complete span.</p> 
+            <img src="./assets/paste.png" alt="the final step" width="900"style="display: block; margin: 0 auto; margin-bottom: 20px" > 
+          </div>
+
             <!-- ###################################### -->
-            <!-- 4. General Rules for identifying the Roles -->
+            <!-- 5. General Rules for identifying the Roles -->
              <!-- ###################################### -->
-             <h2>4. General Rules for Annotating Roles <a href="javascript:toggle_general_rules();" id="displaytext_general_rules" style="font-size: 80%;">(hide)</a></h2>
+             <h2>5. General Rules for Annotating Roles <a href="javascript:toggle_general_rules();" id="displaytext_general_rules" style="font-size: 80%;">(hide)</a></h2>
 
              <div id="examples_general_rules">
 
-                <!-- 4.1 Most informative mention  -->
+                <!-- 5.1 Most informative mention  -->
                 <div class="card card-body">
-                    <h5 class="card-title">4.1 Use the most informative word(s) or phrase of a role in the text.</h5>
+                    <h5 class="card-title">5.1 Use the most informative word(s) or phrase of a role in the text.</h5>
                     In both Passage Text and Source Text role annotations, we want you to capture the most informative word(s) or phrase of a role in the following order of precedence (from most to least informative):
                     <ol>    
                         <li>words denoting names (such as "John Smith", "United States", etc.) 
@@ -552,9 +571,9 @@
                         <li>pronoun mentions (such as "he", "she", "they", "it", etc. )</li>
                     </ol>
                 </div>
-                <!-- 4.2 Adding extra roles  -->
+                <!-- 5.2 Adding extra roles  -->
                 <div class="card card-body">
-                    <h5 class="card-title">4.2 Add extra roles if needed.</h5>
+                    <h5 class="card-title">5.2 Add extra roles if needed.</h5>
                     
                     <p>Sometimes, there might be multiple participants associated with the same role. In the below example, both "He" and "his cousin" can fit as the right candidate for "Employee" Role. </p>
 
@@ -615,7 +634,7 @@
                 </div>
                 <!-- 4.3 Make new valid candidates  -->
                 <div class="card card-body">
-                    <h5 class="card-title">4.3 If your selection is not a valid candidate, you can force it to be one.</h5>
+                    <h5 class="card-title">5.3 If your selection is not a valid candidate, you can force it to be one.</h5>
                     <p>In certain cases, your text selection might not match any of the valid overlapping candidates. In such cases, if you really think that the valid candidates are missing a candidate, you can make your current text selection a valid candidate. In the below example, two extra roles are added -- "Employee__2" and "Employee__3". But while annotating for "Employee__3", the text mention "his wife" is not a valid candidate as per the list shown on right: </p>
 
 
@@ -661,9 +680,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- 4.4 Use Keyboard shortcuts -->
+                <!-- 5.4 Use Keyboard shortcuts -->
                 <div class="card card-body">
-                    <h5 class="card-title">4.4 Use keyboard shortcuts (optional).</h5>
+                    <h5 class="card-title">5.4 Use keyboard shortcuts (optional).</h5>
                     <p>We have provided certain keyboard shortcuts to help speeden your annotation process. You can press the "?" button on your keyboard to view all the keyboard shortcuts.</p>
                 </div>
             </div>
