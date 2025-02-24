@@ -168,6 +168,62 @@ var DataModel = Backbone.Model.extend({
       }
     }
 
+    // Apply silver labels if they exist
+    if (this.attributes.silverLabels) {
+      // Get the first frame name to apply silver labels to
+      var firstFrameName = this.attributes.frameNames[0];
+
+      // Apply passage spans from silver labels
+      if (this.attributes.silverLabels.passageSpans) {
+        for (
+          var roleIndex = 0;
+          roleIndex < this.attributes.passageAnswerSpans[firstFrameName].length;
+          roleIndex++
+        ) {
+          var roleSpan =
+            this.attributes.passageAnswerSpans[firstFrameName][roleIndex];
+          var role = roleSpan.role;
+
+          // Check if this role has a silver label
+          if (this.attributes.silverLabels.passageSpans[role]) {
+            var silverSpan = this.attributes.silverLabels.passageSpans[role];
+
+            // Apply the silver label data
+            roleSpan.sentenceIndex = silverSpan.sentenceIndex;
+            roleSpan.startToken = silverSpan.startToken;
+            roleSpan.endToken = silverSpan.endToken;
+            roleSpan.notPresent = false; // It's present since we have values
+            roleSpan.status = AnswerSpanStatus.OK;
+          }
+        }
+      }
+
+      // Apply source spans from silver labels
+      if (this.attributes.silverLabels.sourceSpans) {
+        for (
+          var roleIndex = 0;
+          roleIndex < this.attributes.sourceAnswerSpans[firstFrameName].length;
+          roleIndex++
+        ) {
+          var roleSpan =
+            this.attributes.sourceAnswerSpans[firstFrameName][roleIndex];
+          var role = roleSpan.role;
+
+          // Check if this role has a silver label
+          if (this.attributes.silverLabels.sourceSpans[role]) {
+            var silverSpan = this.attributes.silverLabels.sourceSpans[role];
+
+            // Apply the silver label data
+            roleSpan.sentenceIndex = silverSpan.sentenceIndex;
+            roleSpan.startToken = silverSpan.startToken;
+            roleSpan.endToken = silverSpan.endToken;
+            roleSpan.notPresent = false; // It's present since we have values
+            roleSpan.status = AnswerSpanStatus.OK;
+          }
+        }
+      }
+    }
+
     // initialize certain attributes as per the first frame
     var first_frame_name = this.attributes.frameNames[0];
     this.attributes.activeSourceAnswerSpans =
