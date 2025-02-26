@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Role Annotation Instructions</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <style>
+        .btn-event {
+            background-color: #edbb07 !important;
+            color: #fff !important;
+        }
+        .btn-success { background-color: #0c7bdc !important; border-color: #0c7bdc; }
+        .btn-outline-success, .btn-outline-success:hover { color: #0c7bdc; border-color: #0c7bdc; }
+        .token { padding: 0.1rem; }
+        .announcement { color: #FF8800; font-weight: bold; font-size: 1.2em; }
+        fex, t, fen { 
+            background-color: #949697; 
+            border: 1px solid #949697; 
+            color: #fff; 
+            margin-right: 5px; 
+            padding: 5px; 
+        }
+        .example_sentence { text-indent: 2em; }
+        .example_sentence span { text-indent: 0; }
+        .wrap_btn { white-space: normal; }
+        body {
+            padding: 20px;
+        }
+        .section-container {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Event and Role Annotation Instructions</h1>
+        
+        <span class="announcement">Updated instructions as of Jan 28, 2025 (<span style="color:red">*new annotated examples added).</span></span>
+        
+        <div class="section-container mt-4">
+            <h2>Overview</h2>
+            <p>
+                In this task, we give you a <span class="btn token btn-event font-weight-bold">highlighted</span> word or phrase in a <b>Passage Text</b>. The highlighted phrase refers to some kind of situation -- for example, a dynamic event (like running or kicking) or a state of being (like happiness or redness). We also give you the <b>Source Text</b> from which this Passage was taken. The Passage text is essentially a summary of some situation from the Source Text<b></b>. We then ask you to do the following:
+                <ol>
+                 <li>identify the "event type" of the <span class="btn token btn-event font-weight-bold">highlighted</span> phrase in the <b>Passage Text</b> <br>
+                 <span style="color:red">Note: This is already pre-highlighted for you in this task based on an earlier task performed by workers. If you still strongly feel that the pre-highlighted event type is not correct, feel free to change it.</span></li>
+                 <li>identify different roles of event in (i) in the <b>Passage Text</b></li>
+                 <li>identify the different roles of the same event in <b>Source Text</b></li>
+                </ol>
+            </p>
+            
+            <p><b>If you prefer watching a video</b>, you can view it here: <a href="https://youtu.be/5QMsbjRnlLo" target="_blank">Annotation Task Example</a></p>
+        </div>
+        
+        <div class="section-container">
+            <h2>Annotated Examples</h2>
+            <p>We are including some good annotated examples from previous iterations of this protocol below:</p>
+            <ul>
+                <li><a href="https://bit.ly/3p9PewY" target="_blank">Firefighting</a></li>
+                <li><a href="https://bit.ly/42XT5uJ" target="_blank">Kidnapping</a></li>
+                <li><a href="https://bit.ly/3JsgYDD" target="_blank">Temporary_leave</a></li>
+                <li><a href="https://bit.ly/3NqBbuO" target="_blank">Destroying</a></li>
+                <li><a href="https://bit.ly/44gMH2z" target="_blank">Clemency</a></li>
+            </ul>
+            <p>For each of the above examples, you can click on all the different roles to see their respective annotation and toggle between 'Passage Text' and 'Source Text' to see roles for both the Texts.</p>
+            
+            <h3>Bonus criteria (upto $4 bonus per HIT):</h3>
+            <p>Each HIT that meets the quality standards will be rewarded up to $4 bonus, and all annotations will undergo quality checks to ensure that only high quality annotations are rewarded.</p>
+        </div>
+
+        <div class="section-container">
+            <h2>1. Identifying the Event Type</h2>
+            
+            <p>
+                Let us look at the task through a running example. We have highlighted one word that refers to a situation (or <em>event</em>) in the <b>Passage Text</b> as shown below: 
+            </p>
+
+            <div class="card card-body mb-3">
+                <div class="example_sentence">
+                    He was <span class="btn token btn-event font-weight-bold">hired</span> as a Research Scientist by Microsoft.
+                </div>
+            </div>
+
+            <p>
+                Your first task is to identify what type of event is highlighted in the Passage Text from a list of options. For example, for "hired" you might see choices like:
+            </p>
+            
+            <div class="mb-3">
+                <button class="btn wrap_btn mr-2 mt-1 btn-outline-success">Choosing</button>
+                <button class="btn wrap_btn mr-2 mt-1 btn-outline-success">Firing</button>
+                <button class="btn wrap_btn mr-2 mt-1 btn-outline-success">Renting</button>
+                <button class="btn wrap_btn mr-2 mt-1 btn-success font-weight-bold">Hiring</button>
+                <button class="btn wrap_btn mr-2 mt-1 btn-outline-success">Appointing</button>
+            </div>
+
+            <p>For our running example, <b>Hiring</b> is the correct event type.</p>
+        </div>
+
+        <div class="section-container">
+            <h2>2. Identifying the Roles in Passage Text</h2>
+            
+            <p>
+                Once you finalize the event type, start annotating the roles of that event in the Passage Text. Roles are different participants of the event. For example, the "Hiring" event type has roles like "Employee", "Employer", "Position", etc.
+            </p>
+
+            <h4>2.1 Role Annotation Examples</h4>
+
+            <div class="card mb-3">
+                <div class="card-header">2.1.1 Single Word Role: "Employee"</div>
+                <div class="card-body">
+                    <p>Select by clicking and dragging over the word(s):</p>
+                    <div class="example_sentence mb-3">
+                        <span class="btn token btn-dark">He</span> was <span class="btn token btn-event font-weight-bold">hired</span> as a Research Scientist by Microsoft.
+                    </div>
+                    <p>Here, "He" is the Employee role.</p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">2.1.2 Multiple Word Role: "Position"</div>
+                <div class="card-body">
+                    <p>Select multiple words for a role when needed:</p>
+                    <div class="example_sentence mb-3">
+                        He was <span class="btn token btn-event font-weight-bold">hired</span> <span class="btn token btn-dark">as</span> <span class="btn token btn-dark">a</span> <span class="btn token btn-dark">Research</span> <span class="btn token btn-dark">Scientist</span> by Microsoft.
+                    </div>
+                    <p>Here, "as a Research Scientist" is the Position role.</p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">2.1.3 Missing Role: "Task"</div>
+                <div class="card-body">
+                    <p>If no text mentions a role, select "No candidate found for the current role"</p>
+                    <p>Example: In "He was hired as a Research Scientist by Microsoft", there's no mention of what tasks he'll perform.</p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">2.1.4 Valid Candidates</div>
+                <div class="card-body">
+                    <p>The system shows valid overlapping candidates you can select from. Choose the most appropriate one.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-container">
+            <h2>3. Identifying the Roles in Source Text</h2>
+            
+            <p>
+                After identifying roles in the Passage Text, toggle to Source Text and identify roles there. The rules are the same, but the event phrase isn't highlighted in the source text. You'll need to identify roles for the same event that was highlighted in the passage.
+            </p>
+            
+            <p>
+                The Source Text often contains more detailed information, so you may find roles that weren't present in the Passage Text.
+            </p>
+        </div>
+
+        <div class="section-container">
+            <h2>4. Handling Edge Cases in Selecting Spans</h2>
+            
+            <p>If you can't select the whole text span you need:</p>
+            <ol>
+                <li>Keep a partial span selected and click the "plain text" button</li>
+                <li>Copy the complete desired span from the plain text version</li>
+                <li>Click back to the original text view</li>
+                <li>Paste into the type-in bar at the top of candidates list</li>
+                <li>Click "Add Custom Candidate"</li>
+                <li>Select your newly added candidate</li>
+            </ol>
+        </div>
+
+        <div class="section-container">
+            <h2>5. General Rules for Annotating Roles</h2>
+            
+            <div class="card mb-3">
+                <div class="card-header">5.1 Use the most informative phrase</div>
+                <div class="card-body">
+                    <p>Select in order of preference:</p>
+                    <ol>
+                        <li>Names (e.g., "John Smith", "United States")</li>
+                        <li>Descriptive mentions (e.g., "the 32-year-old man", "the tallest building")</li>
+                        <li>Pronouns (e.g., "he", "she", "they", "it")</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="card mb-3">
+                <div class="card-header">5.2 Add extra roles when needed</div>
+                <div class="card-body">
+                    <p>If multiple participants fill the same role (e.g., multiple employees being hired), use the "Add Role" dropdown to create additional instances of that role (e.g., Employee__2, Employee__3).</p>
+                </div>
+            </div>
+            
+            <div class="card mb-3">
+                <div class="card-header">5.3 Making valid candidates</div>
+                <div class="card-body">
+                    <p>If your selection isn't listed as a valid candidate, click "Add currently selected text as a valid candidate".</p>
+                </div>
+            </div>
+            
+            <div class="card mb-3">
+                <div class="card-header">5.4 Keyboard shortcuts</div>
+                <div class="card-body">
+                    <p>Press "?" to view all keyboard shortcuts:</p>
+                    <ul>
+                        <li><kbd>1</kbd>-<kbd>9</kbd>: Select candidate from list</li>
+                        <li><kbd>n</kbd>: No candidate found</li>
+                        <li><kbd>Tab</kbd>: Next role</li>
+                        <li><kbd>Shift</kbd>+<kbd>Tab</kbd>: Previous role</li>
+                        <li><kbd>?</kbd>: Show shortcuts</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center my-4">
+            <a href="javascript:window.close();" class="btn btn-primary">Return to Task</a>
+        </div>
+    </div>
+</body>
+</html>
