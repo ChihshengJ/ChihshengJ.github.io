@@ -1,36 +1,49 @@
-<!DOCTYPE html>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous">
-    
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>
+<!doctype html>
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+  crossorigin="anonymous"
+/>
 
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"
+></script>
+
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
             crossorigin="anonymous"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" 
-            integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" 
-            crossorigin="anonymous"></script>
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" 
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+  integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+  crossorigin="anonymous"
+></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" 
             integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" 
             crossorigin="anonymous"></script> -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore.js"
-            integrity="sha384-77p0pqpfMaY9Jg4DcGbencxtYzKWg/Z+wIFbgDlPu4bEwb2fsCrK/ph2uUprTGv8"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.0/backbone.js"
-            integrity="sha384-nhWt56PME93S1JQLa+kxZkVkAPQAVXJ2QFp2upRdyHKS83dOhoiHLwkiWMcLjmPc"
-            crossorigin="anonymous"></script>
+<script
+  src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+  integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore.js"
+  integrity="sha384-77p0pqpfMaY9Jg4DcGbencxtYzKWg/Z+wIFbgDlPu4bEwb2fsCrK/ph2uUprTGv8"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.0/backbone.js"
+  integrity="sha384-nhWt56PME93S1JQLa+kxZkVkAPQAVXJ2QFp2upRdyHKS83dOhoiHLwkiWMcLjmPc"
+  crossorigin="anonymous"
+></script>
 
-    <script src="https://s3.amazonaws.com/mturk-public/externalHIT_v1.js"></script>
-    <!-- Bootstrap toggle -->            
+<script src="https://s3.amazonaws.com/mturk-public/externalHIT_v1.js"></script>
+<!-- Bootstrap toggle -->
 
-            <style>
-                /**
+<style>
+  /**
                  * Bootstrap button colors:
                  *
                  *     btn-primary:   #007bff
@@ -46,282 +59,361 @@
                  *     http://stripesgenerator.com
                  */
 
-                 /* Custom button -- https://charliepark.org/bootstrap_buttons */
-                .btn-event {
-                    background-color: hsl(47, 94%, 48%) !important;
-                    background-repeat: repeat-x;
-                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#edbb07", endColorstr="#edbb07");
-                    background-image: -khtml-gradient(linear, left top, left bottom, from(#edbb07), to(#edbb07));
-                    background-image: -moz-linear-gradient(top, #edbb07, #edbb07);
-                    background-image: -ms-linear-gradient(top, #edbb07, #edbb07);
-                    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #edbb07), color-stop(100%, #edbb07));
-                    background-image: -webkit-linear-gradient(top, #edbb07, #edbb07);
-                    background-image: -o-linear-gradient(top, #edbb07, #edbb07);
-                    background-image: linear-gradient(#edbb07, #edbb07);
-                    border-color: #edbb07 #edbb07 hsl(47, 94%, 48%);
-                    color: #fff !important;
-                    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
-                    -webkit-font-smoothing: antialiased;
-                    }
+  /* Custom button -- https://charliepark.org/bootstrap_buttons */
+  .btn-event {
+    background-color: hsl(47, 94%, 48%) !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#edbb07", endColorstr="#edbb07");
+    background-image: -khtml-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(#edbb07),
+      to(#edbb07)
+    );
+    background-image: -moz-linear-gradient(top, #edbb07, #edbb07);
+    background-image: -ms-linear-gradient(top, #edbb07, #edbb07);
+    background-image: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      color-stop(0%, #edbb07),
+      color-stop(100%, #edbb07)
+    );
+    background-image: -webkit-linear-gradient(top, #edbb07, #edbb07);
+    background-image: -o-linear-gradient(top, #edbb07, #edbb07);
+    background-image: linear-gradient(#edbb07, #edbb07);
+    border-color: #edbb07 #edbb07 hsl(47, 94%, 48%);
+    color: #fff !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: antialiased;
+  }
 
-                .btn-success.btn-dark {
-                    background-image: linear-gradient(45deg, #218838 25%, #23272b 25%, #23272b 50%, #218838 50%, #218838 75%, #23272b 75%, #23272b 100%);
-                    background-size: 28.28px 28.28px;
-                }
+  .btn-success.btn-dark {
+    background-image: linear-gradient(
+      45deg,
+      #218838 25%,
+      #23272b 25%,
+      #23272b 50%,
+      #218838 50%,
+      #218838 75%,
+      #23272b 75%,
+      #23272b 100%
+    );
+    background-size: 28.28px 28.28px;
+  }
 
-                .btn-event.btn-dark {
-                    background-image: linear-gradient(45deg, #dc3545 25%, #23272b 25%, #23272b 50%, #dc3545 50%, #dc3545 75%, #23272b 75%, #23272b 100%);
-                    background-size: 28.28px 28.28px;
-                }
+  .btn-event.btn-dark {
+    background-image: linear-gradient(
+      45deg,
+      #dc3545 25%,
+      #23272b 25%,
+      #23272b 50%,
+      #dc3545 50%,
+      #dc3545 75%,
+      #23272b 75%,
+      #23272b 100%
+    );
+    background-size: 28.28px 28.28px;
+  }
 
-                .btn-outline-success:hover {
-                    color: #218838;
-                    border-color: #218838;
-                    background-color: transparent;
-                    background-image: none;
-                }
-                .btn-outline-success.btn-dark {
-                    background-image: linear-gradient(#218838, #23272b, #218838);
-                    color: #fff;
-                    border-color: #218838;
-                    border-left-width: 2px;
-                    border-right-width: 2px;
-                }
-            
-                .btn-danger.btn-dark {
-                    background-image: linear-gradient(45deg, #dc3545 25%, #23272b 25%, #23272b 50%, #dc3545 50%, #dc3545 75%, #23272b 75%, #23272b 100%);
-                    background-size: 28.28px 28.28px;
-                }
-                .btn-outline-danger:hover {
-                    color: #dc3545;
-                    border-color: #dc3545;
-                    background-color: transparent;
-                    background-image: none;
-                }
-                .btn-outline-danger.btn-dark {
-                    background-image: linear-gradient(#dc3545, #23272b, #dc3545);
-                    color: #fff;
-                    border-color: #dc3545;
-                    border-left-width: 2px;
-                    border-right-width: 2px;
-                }
-      
-                .token {
-                    padding: 0.1rem;
-                }
+  .btn-outline-success:hover {
+    color: #218838;
+    border-color: #218838;
+    background-color: transparent;
+    background-image: none;
+  }
+  .btn-outline-success.btn-dark {
+    background-image: linear-gradient(#218838, #23272b, #218838);
+    color: #fff;
+    border-color: #218838;
+    border-left-width: 2px;
+    border-right-width: 2px;
+  }
 
-                .announcement{
-                color: #FF8800;
-                display: inline-block;
-                font-weight : bold;
-                font-size : 1.2em;
-                text-indent: 0;
-                margin-bottom: 0;
-                padding-bottom: 0;
-                }
+  .btn-danger.btn-dark {
+    background-image: linear-gradient(
+      45deg,
+      #dc3545 25%,
+      #23272b 25%,
+      #23272b 50%,
+      #dc3545 50%,
+      #dc3545 75%,
+      #23272b 75%,
+      #23272b 100%
+    );
+    background-size: 28.28px 28.28px;
+  }
+  .btn-outline-danger:hover {
+    color: #dc3545;
+    border-color: #dc3545;
+    background-color: transparent;
+    background-image: none;
+  }
+  .btn-outline-danger.btn-dark {
+    background-image: linear-gradient(#dc3545, #23272b, #dc3545);
+    color: #fff;
+    border-color: #dc3545;
+    border-left-width: 2px;
+    border-right-width: 2px;
+  }
 
-                /* Override sucess buttons */
-                .btn-success {
-                    background-color: #0c7bdc !important;
-                    border-color: #0c7bdc;
-                }
-                .btn-outline-success, .btn-outline-success:hover  {
-                    background-image: none;
-                    color: #0c7bdc;
-                    border-color: #0c7bdc;
-                    border-left-width: 2px;
-                    border-right-width: 2px;
-                }
+  .token {
+    padding: 0.1rem;
+  }
 
-                fex {
-                    background-color: #949697;
-                    border: 1px solid #949697;
-                    color: #fff;
-                    margin-right: 5px;
-                    padding: 5px; 
-                    border-left-width: 2px;
-                    border-right-width: 2px;                   
-                }
+  .announcement {
+    color: #ff8800;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-indent: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
 
-                t {
-                    background-color: #949697;
-                    border: 1px solid #949697;
-                    color: #fff;
-                    margin-right: 5px;
-                    padding: 5px; 
-                    border-left-width: 2px;
-                    border-right-width: 2px;                   
-                }
+  /* Override sucess buttons */
+  .btn-success {
+    background-color: #0c7bdc !important;
+    border-color: #0c7bdc;
+  }
+  .btn-outline-success,
+  .btn-outline-success:hover {
+    background-image: none;
+    color: #0c7bdc;
+    border-color: #0c7bdc;
+    border-left-width: 2px;
+    border-right-width: 2px;
+  }
 
-                .scrollClass {
-                    height:300px;
-                    overflow: scroll;
-                    }
+  fex {
+    background-color: #949697;
+    border: 1px solid #949697;
+    color: #fff;
+    margin-right: 5px;
+    padding: 5px;
+    border-left-width: 2px;
+    border-right-width: 2px;
+  }
 
-                hr {
-                    position: relative;
-                    top: 0px;
-                    border: none;
-                    height: 1px;
-                    background: black;
-                    margin-bottom: 5px;
-                }
+  t {
+    background-color: #949697;
+    border: 1px solid #949697;
+    color: #fff;
+    margin-right: 5px;
+    padding: 5px;
+    border-left-width: 2px;
+    border-right-width: 2px;
+  }
 
-                .example_sentence {
-                    text-indent: 2em;
-                }
-                .example_sentence span {
-                    text-indent: 0;
-                }
-            
-                .wrap_btn {
-                    white-space: normal;
-                }
-                
-                .noselect {
-                -webkit-touch-callout: none; /* iOS Safari */
-                    -webkit-user-select: none; /* Safari */
-                    -khtml-user-select: none; /* Konqueror HTML */
-                    -moz-user-select: none; /* Old versions of Firefox */
-                        -ms-user-select: none; /* Internet Explorer/Edge */
-                            user-select: none; /* Non-prefixed version, currently
+  .scrollClass {
+    height: 300px;
+    overflow: scroll;
+  }
+
+  hr {
+    position: relative;
+    top: 0px;
+    border: none;
+    height: 1px;
+    background: black;
+    margin-bottom: 5px;
+  }
+
+  .example_sentence {
+    text-indent: 2em;
+  }
+  .example_sentence span {
+    text-indent: 0;
+  }
+
+  .wrap_btn {
+    white-space: normal;
+  }
+
+  .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
                                                 supported by Chrome, Edge, Opera and Firefox */
-                }
-            </style>
+  }
+</style>
 
-<html>
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore.js"></script>
-    <script src="./role_script.js"></script>
-    <style>
-       .btn-event {
-            background-color: #edbb07 !important;
-            color: #fff !important;
-        }
-        .btn-success { background-color: #0c7bdc !important; border-color: #0c7bdc; }
-        .btn-outline-success, .btn-outline-success:hover { color: #0c7bdc; border-color: #0c7bdc; }
-        .token { padding: 0.1rem; }
-        fex, t, fen { 
-            background-color: #949697; 
-            border: 1px solid #949697; 
-            color: #fff; 
-            margin-right: 5px; 
-            padding: 5px; 
-        }
-        .wrap_btn { white-space: normal; }
-        .noselect {
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-    </style>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  />
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore.js"></script>
+  <script src="https://chihshengj.github.io/assets/js/role_script.js"></script>
+  <style>
+    .btn-event {
+      background-color: #edbb07 !important;
+      color: #fff !important;
+    }
+    .btn-success {
+      background-color: #0c7bdc !important;
+      border-color: #0c7bdc;
+    }
+    .btn-outline-success,
+    .btn-outline-success:hover {
+      color: #0c7bdc;
+      border-color: #0c7bdc;
+    }
+    .token {
+      padding: 0.1rem;
+    }
+    fex,
+    t,
+    fen {
+      background-color: #949697;
+      border: 1px solid #949697;
+      color: #fff;
+      margin-right: 5px;
+      padding: 5px;
+    }
+    .wrap_btn {
+      white-space: normal;
+    }
+    .noselect {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  </style>
 </head>
-<body>
-    <!-- This form tag is needed to post the 'hidden' input fields to Turkle -->
-    <form id="mturk_form" method="POST">
-        <input id="assignmentId" name="assignmentId" type="hidden">
-        <input id="answer_spans" name="answer_spans" type="hidden">
+<input id="assignmentId" name="assignmentId" type="hidden" />
+<input id="answer_spans" name="answer_spans" type="hidden" />
+<input id="dataUrl" name="dataUrl" type="hidden" value="${dataUrl}" />
 
-    <div id="content" class="container p-4">
-        <!-- Instructions Link -->
-        <div class="text-center mb-4">
-            <a href="https://chihshengj.github.io/assets/js/instructions.html" target="_blank" class="btn btn-lg btn-info">
-                View Detailed Instructions
-            </a>
-            <p class="mt-2 text-muted">Please read the instructions before starting the task</p>
+<div id="content" class="container p-4">
+  <!-- Instructions Link -->
+  <div class="text-center mb-4">
+    <a
+      href="https://chihshengj.github.io/assets/js/instructions.html"
+      target="_blank"
+      class="btn btn-lg btn-info"
+    >
+      View Detailed Instructions
+    </a>
+    <p class="mt-2 text-muted">
+      Please read the instructions before starting the task
+    </p>
+  </div>
+
+  <!-- Keyboard Shortcuts Quick Reference -->
+  <div class="card mb-4">
+    <div class="card-header bg-light">
+      <h5>Keyboard Shortcuts</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <ul class="list-unstyled">
+            <li><kbd>1</kbd>-<kbd>9</kbd>: Select candidate from list</li>
+            <li><kbd>n</kbd>: No candidate found</li>
+            <li><kbd>Tab</kbd>: Next role</li>
+          </ul>
         </div>
-
-        <!-- Keyboard Shortcuts Quick Reference -->
-        <div class="card mb-4">
-            <div class="card-header bg-light">
-                <h5>Keyboard Shortcuts</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <ul class="list-unstyled">
-                            <li><kbd>1</kbd>-<kbd>9</kbd>: Select candidate from list</li>
-                            <li><kbd>n</kbd>: No candidate found</li>
-                            <li><kbd>Tab</kbd>: Next role</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <ul class="list-unstyled">
-                            <li><kbd>Shift</kbd>+<kbd>Tab</kbd>: Previous role</li>
-                            <li><kbd>→</kbd>/<kbd>←</kbd>: Select next/previous word</li>
-                            <li><kbd>?</kbd>: Show all shortcuts</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <div class="col-md-6">
+          <ul class="list-unstyled">
+            <li><kbd>Shift</kbd>+<kbd>Tab</kbd>: Previous role</li>
+            <li><kbd>→</kbd>/<kbd>←</kbd>: Select next/previous word</li>
+            <li><kbd>?</kbd>: Show all shortcuts</li>
+          </ul>
         </div>
-        
-        <!-- begin main interface -->
-        <div class="row pt-3 pb-3">
-            <div class="col-9">
-                <div id="event_list"></div>
-                <div id="sentence_list"></div>
-                <div id="role_info"></div>
-            </div>
+      </div>
+    </div>
+  </div>
 
-            <div class="col-3">
-                <div class="border p-3 sticky-top">
-                    <div id="candidate_list" class="btn-group-vertical"></div>
-                </div>
-            </div>
+  <!-- begin main interface -->
+  <div class="row pt-3 pb-3">
+    <div class="col-9">
+      <div id="event_list"></div>
+      <div id="sentence_list"></div>
+      <div id="role_info"></div>
+    </div>
+
+    <div class="col-3">
+      <div class="border p-3 sticky-top">
+        <div id="candidate_list" class="btn-group-vertical"></div>
+      </div>
+    </div>
+  </div>
+  <!-- end main interface -->
+
+  <div id="alerts"></div>
+
+  <!-- Keyboard shortcuts -->
+  <div
+    class="modal fade"
+    id="keyboard_shortcuts"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="keyboard_shortcuts_title"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="keyboard_shortcuts_title">
+            Keyboard Shortcuts
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <!-- end main interface -->
-
-        <div id="alerts"></div>
-
-        <!-- Keyboard shortcuts -->
-        <div class="modal fade" id="keyboard_shortcuts" tabindex="-1" role="dialog" aria-labelledby="keyboard_shortcuts_title" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="keyboard_shortcuts_title">Keyboard Shortcuts</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="table table-sm">
-                            <tr>
-                                <td><span class="btn btn-light p-1 border">1</span> - <span class="btn btn-light p-1 border">9</span></td>
-                                <td>Select candidate from list</td>
-                            </tr>
-                            <tr>
-                                <td><span class="btn btn-light p-1 border">n</span></td>
-                                <td>No candidate found</td>
-                            </tr>
-                            <tr>
-                                <td><span class="btn btn-light p-1 border">Tab</span></td>
-                                <td>Next role</td>
-                            </tr>
-                            <tr>
-                                <td><span class="btn btn-light p-1 border">Shift+Tab</span></td>
-                                <td>Previous role</td>
-                            </tr>
-                            <tr>
-                                <td><span class="btn btn-light p-1 border">?</span></td>
-                                <td>Show shortcuts</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        <div class="modal-body">
+          <table class="table table-sm">
+            <tr>
+              <td>
+                <span class="btn btn-light p-1 border">1</span> -
+                <span class="btn btn-light p-1 border">9</span>
+              </td>
+              <td>Select candidate from list</td>
+            </tr>
+            <tr>
+              <td><span class="btn btn-light p-1 border">n</span></td>
+              <td>No candidate found</td>
+            </tr>
+            <tr>
+              <td><span class="btn btn-light p-1 border">Tab</span></td>
+              <td>Next role</td>
+            </tr>
+            <tr>
+              <td><span class="btn btn-light p-1 border">Shift+Tab</span></td>
+              <td>Previous role</td>
+            </tr>
+            <tr>
+              <td><span class="btn btn-light p-1 border">?</span></td>
+              <td>Show shortcuts</td>
+            </tr>
+          </table>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <div class="text-center mt-4">
-            <input id="submitButton" class="btn btn-primary" type="submit" value="Submit" />
-        </div>
-    </form>
-</body>
-</html>
+  <div class="text-center mt-4">
+    <input
+      id="submitButton"
+      class="btn btn-primary"
+      type="submit"
+      value="Submit"
+    />
+  </div>
+</div>

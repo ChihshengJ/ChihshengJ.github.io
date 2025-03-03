@@ -1884,7 +1884,7 @@ var AppView = Backbone.View.extend({
 });
 
 $(document).ready(function () {
-  var dataUrl = getURLParameter("dataUrl");
+  var dataUrl = getURLParameter("dataUrl") || $("#dataUrl").val();
   if (dataUrl) {
     console.log("Loading data from " + dataUrl);
     $.getJSON(dataUrl, function (data) {
