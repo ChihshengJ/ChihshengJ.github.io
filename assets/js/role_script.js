@@ -1309,7 +1309,7 @@ var EventView = Backbone.View.extend({
     // add frame name .xml at the end
     var activeFrameName = this.model.attributes.frameNames[activeFrameIndex];
     var event_url =
-      "https://framenet2.icsi.berkeley.edu/fnReports/data/frame/" +
+      "https://framenet.icsi.berkeley.edu/fnReports/data/frame/" +
       activeFrameName +
       ".xml";
 
