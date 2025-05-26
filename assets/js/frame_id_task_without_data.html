@@ -1,0 +1,489 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+<!-- Main Changes made from the overall protocol 
+ 1. Commented events from Sentence View 
+ 2. Commented CandidateList View render function from AppView initialize 
+ 3. Commented html heading for CandidatelistView at the bottom (where instructions are defined)
+ 4. 1495 line commented (Removing "Answer:" in Role Spans) 
+ 5. 1529, 1530 line commented (hide add role button)
+ 6. Change success and danger buttons to secondary in Role View
+ 7. Sentence View remove the Source Text button so that it can't be clicked.
+ 8. Update scroll value in Source Text to whatever the annotators scroll to in all cases
+    comment out the if logic "if (activeRoleIsValid)"" completely to update scroll value all the time (line 1457)
+ 9. added 'roleHeadingDiv' in roleView to display that role info is only for reference.
+ 10. activeFrameIndex == -2 when the none type option is selected for event type, event trigger function is modified in    EventView and for both EventView and RoleView (if conditions are modified to include both -1 and -2).
+ 11. Change outputs in the onSubmit function
+-->
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
+            crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" 
+            integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" 
+            crossorigin="anonymous"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" 
+            integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" 
+            crossorigin="anonymous"></script> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore.js"
+            integrity="sha384-77p0pqpfMaY9Jg4DcGbencxtYzKWg/Z+wIFbgDlPu4bEwb2fsCrK/ph2uUprTGv8"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.0/backbone.js"
+            integrity="sha384-nhWt56PME93S1JQLa+kxZkVkAPQAVXJ2QFp2upRdyHKS83dOhoiHLwkiWMcLjmPc"
+            crossorigin="anonymous"></script>
+
+    <!-- Bootstrap toggle -->            
+
+            <style>
+                /**
+                 * Bootstrap button colors:
+                 *
+                 *     btn-primary:   #007bff
+                 *     btn-secondary: #5a6268
+                 *     btn-success:   #218838
+                 *     btn-info:      #16a2b8
+                 *     btn-warning:   #f0ad4e
+                 *     btn-danger:    #dc3545
+                 *     btn-dark:      #23272b
+                 *
+                 * We use this tool to generate the skeleton for striped buttons:
+                 *
+                 *     http://stripesgenerator.com
+                 */
+
+                 /* Custom button -- https://charliepark.org/bootstrap_buttons */
+                .btn-event {
+                    background-color: hsl(47, 94%, 48%) !important;
+                    background-repeat: repeat-x;
+                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#edbb07", endColorstr="#edbb07");
+                    background-image: -khtml-gradient(linear, left top, left bottom, from(#edbb07), to(#edbb07));
+                    background-image: -moz-linear-gradient(top, #edbb07, #edbb07);
+                    background-image: -ms-linear-gradient(top, #edbb07, #edbb07);
+                    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #edbb07), color-stop(100%, #edbb07));
+                    background-image: -webkit-linear-gradient(top, #edbb07, #edbb07);
+                    background-image: -o-linear-gradient(top, #edbb07, #edbb07);
+                    background-image: linear-gradient(#edbb07, #edbb07);
+                    border-color: #edbb07 #edbb07 hsl(47, 94%, 48%);
+                    color: #fff !important;
+                    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
+                    -webkit-font-smoothing: antialiased;
+                    }
+
+                .btn-success.btn-dark {
+                    background-image: linear-gradient(45deg, #218838 25%, #23272b 25%, #23272b 50%, #218838 50%, #218838 75%, #23272b 75%, #23272b 100%);
+                    background-size: 28.28px 28.28px;
+                }
+
+                .btn-event.btn-dark {
+                    background-image: linear-gradient(45deg, #dc3545 25%, #23272b 25%, #23272b 50%, #dc3545 50%, #dc3545 75%, #23272b 75%, #23272b 100%);
+                    background-size: 28.28px 28.28px;
+                }
+
+                .btn-outline-success:hover {
+                    color: #218838;
+                    border-color: #218838;
+                    background-color: transparent;
+                    background-image: none;
+                }
+                .btn-outline-success.btn-dark {
+                    background-image: linear-gradient(#218838, #23272b, #218838);
+                    color: #fff;
+                    border-color: #218838;
+                    border-left-width: 2px;
+                    border-right-width: 2px;
+                }
+            
+                .btn-danger.btn-dark {
+                    background-image: linear-gradient(45deg, #dc3545 25%, #23272b 25%, #23272b 50%, #dc3545 50%, #dc3545 75%, #23272b 75%, #23272b 100%);
+                    background-size: 28.28px 28.28px;
+                }
+                .btn-outline-danger:hover {
+                    color: #dc3545;
+                    border-color: #dc3545;
+                    background-color: transparent;
+                    background-image: none;
+                }
+                .btn-outline-danger.btn-dark {
+                    background-image: linear-gradient(#dc3545, #23272b, #dc3545);
+                    color: #fff;
+                    border-color: #dc3545;
+                    border-left-width: 2px;
+                    border-right-width: 2px;
+                }
+      
+                .token {
+                    padding: 0.1rem;
+                }
+
+                .announcement{
+                color: #FF8800;
+                display: inline-block;
+                font-weight : bold;
+                font-size : 1.2em;
+                text-indent: 0;
+                margin-bottom: 0;
+                padding-bottom: 0;
+                }
+
+                /* Override sucess buttons */
+                .btn-success {
+                    background-color: #0c7bdc !important;
+                    border-color: #0c7bdc;
+                }
+                .btn-outline-success, .btn-outline-success:hover  {
+                    background-image: none;
+                    color: #0c7bdc;
+                    border-color: #0c7bdc;
+                    border-left-width: 2px;
+                    border-right-width: 2px;
+                }
+
+                fex {
+                    background-color: #949697;
+                    border: 1px solid #949697;
+                    color: #fff;
+                    margin-right: 5px;
+                    padding: 5px; 
+                    border-left-width: 2px;
+                    border-right-width: 2px;                   
+                }
+
+                t {
+                    background-color: #949697;
+                    border: 1px solid #949697;
+                    color: #fff;
+                    margin-right: 5px;
+                    padding: 5px; 
+                    border-left-width: 2px;
+                    border-right-width: 2px;                   
+                }
+
+                .scrollClass {
+                    height:300px;
+                    overflow: scroll;
+                    }
+
+                hr {
+                    position: relative;
+                    top: 0px;
+                    border: none;
+                    height: 1px;
+                    background: black;
+                    margin-bottom: 5px;
+                }
+
+                .example_sentence {
+                    text-indent: 2em;
+                }
+                .example_sentence span {
+                    text-indent: 0;
+                }
+            
+                .wrap_btn {
+                    white-space: normal;
+                }
+                
+                .noselect {
+                -webkit-touch-callout: none; /* iOS Safari */
+                    -webkit-user-select: none; /* Safari */
+                    -khtml-user-select: none; /* Konqueror HTML */
+                    -moz-user-select: none; /* Old versions of Firefox */
+                        -ms-user-select: none; /* Internet Explorer/Edge */
+                            user-select: none; /* Non-prefixed version, currently
+                                                supported by Chrome, Edge, Opera and Firefox */
+                }
+            </style>
+
+    
+
+<script src="./frame_id_script.js"></script>   
+
+    <!-- *********************************************** -->
+    <!-- HTML -->
+    <!-- *********************************************** -->
+
+    <input id="answer_spans" name="answer_spans" type="hidden"></input>
+
+    <div id="content" class="container p-4">
+        <!-- instructions Start -->
+        <div class="text-center">
+            <button id="toggle_instructions" class="btn wrap_btn btn-lg btn-info" type="button" data-toggle="collapse" data-target="#instructions" aria-expanded="false" aria-controls="instructions">Instructions</button>
+        </div>
+
+        <!-- begin instructions -->
+    <div id="instructions" class="ps-5 pe-5 pt-3 pb-3 collapse">
+        <p>
+            In this task, we give you a <span class="btn token btn-event font-weight-bold">highlighted</span> word or phrase in a <b>Passage Text</b>. The highlighted phrase refers to some kind of situation -- for example, a dynamic event (like running or kicking) or a state of being (like happiness or redness). We then ask you to do the following:
+            <ol>
+             <li>identify the "event type" of the <span class="btn token btn-event font-weight-bold">highlighted</span> phrase in the <b>Passage Text</b></li> 
+             <li>Tell us whether the <b>Source Text</b> contains the description of the same event highlighted in the <b>Passage Text.</b> </li>
+            </ol>
+
+            We show an example below to explain both the annotation tasks.
+        </p>
+
+        <!-- <span class="announcement">This is a qualification task. We plan to launch a bulk task very soon.</span> -->
+
+             <!-- ###################################### -->
+            <!-- 1. Identifying the Event Type -->
+             <!-- ###################################### -->
+            <h2>1. Identifying the Event Type <a href="javascript:toggle_event_type();" id="displaytext_eventtype" style="font-size: 80%;">(hide)</a></h2>
+            
+            <div id="examples_event_type">
+                <p>
+                    Let us look at the task through an example. We have highlighted one word that refers to a situation (or <em>event</em>) in the <b>Passage Text</b> as shown below: 
+                </p>
+
+                <div class="card card-body">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons"><label for="passage_text" id="passage_toggle_example" class="btn btn-outline-dark active"><input type="radio" name="options" id="passage_text" autocomplete="off" checked=""> Passage Text</label></div>
+                    <br>
+                    <div class="example_sentence">
+                        He was <span class="btn token btn-event font-weight-bold">hired</span> as a Research Scientist by Microsoft.
+                    </div>
+                </div>
+
+                <p>
+                    Your task is to identify what type of event is highlighted in the Passage Text from a list of 5 options, as shown below:
+                </p>
+                <!-- Blank buttons -->
+                <div>
+                    <div class="select_frame_button btn wrap_btn mr-2 mt-1 btn-outline-success">Choosing</div><div class="select_frame_button_example btn wrap_btn mr-2 mt-1 btn-outline-success">Firing</div>
+                    <div class="select_frame_button_example btn wrap_btn mr-2 mt-1 btn-outline-success">Renting</div>
+                    <div class="select_frame_button_example btn wrap_btn mr-2 mt-1 btn-outline-success">Hiring</div><div class="select_frame_button_example btn wrap_btn mr-2 mt-1 btn-outline-success">Appointing</div>
+                </div>
+
+            
+                <p> Clicking on an event type button displays the definition of that event type along with an example of that event type:</p>
+
+                <div class="card card-body">
+                        <!-- Highlighted event buttons -->
+                    <div>
+                        <div class="select_frame_button_example btn wrap_btn mr-2 mt-1 btn-outline-success">Choosing</div><div class="select_frame_button_example btn wrap_btn mr-2 mt-1 btn-outline-success">Firing</div>
+                        <div class="select_frame_button_example btn wrap_btn mr-2 mt-1 btn-outline-success">Renting</div>
+                        <div class="select_frame_button_example btn wrap_btn mr-2 mt-1 btn-success font-weight-bold">Hiring</div>
+                        <div class="select_frame_button_example btn wrap_btn mr-2 mt-1 btn-outline-success">Appointing</div>
+                    </div>
+
+                    <!-- Event definition and example -->
+                    <div class="clearfix mr-2 mt-1"><div class="clearfix"></div><div class="mb-2 float-left"><i class="mr-2 mt-1">Your Answer for Event Type:</i><div class="btn wrap_btn p-1 mr-4 mt-1 font-weight-bold btn-event">Hiring</div></div><div class="clearfix"></div><div class="mb-2 float-left"><i class="mr-2 mt-1">Event Definition:</i></div><div class="mb-2 float-left">An Employer hires an Employee, promising the Employee a certain Compensation in exchange for the performance of a job.</div><div class="clearfix"></div><div class="mb-2 float-left"><i class="mr-2 mt-1">Event Example:</i></div>John was <t>hired</t> to clean up the file system.</div>
+                </div>
+                <p> For our running example, <b>Hiring</b> is the correct event type.</p>
+
+            <p>Most of the times, you should find the correct event type among the given options, although sometimes it can happen that none of the event types fit well for the <span class="btn token btn-event font-weight-bold">highlighted</span> phrase. If you feel that none of the displayed Event Types match the highlighted span, you can click on the following button:
+
+             <div class="select_frame_button_example btn wrap_btn mr-2 mt-1 btn-secondary font-weight-bold">None of the Event Type matches the highlighted span</div>
+              
+            </p>
+            <!-- ###################################### -->
+            <!-- 1.1. Roles in Pasage Text -->
+             <!-- ###################################### -->
+            <h4>1.1. Roles (or Participants) in Passage Text <a href="javascript:toggle_role_passage();" id="displaytext_roles_passage" style="font-size: 80%;">(hide)</a></h4>
+            <div id="examples_roles_passage">
+                <p>
+                    We provide the roles of each event type along with its definition. Roles are different participants of the event. We provide the roles to give you a better idea of the event type in case it is not clear from the event definition. When clicking on an event type, its roles are also displayed below the passage text. These are only meant for reference. For example, the "Hiring" event type has 5 fixed roles as shown in the below example. The current active role is "Employee": 
+                </p>
+
+                <div class="card card-body">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons"><label for="passage_text" id="passage_toggle_example" class="btn btn-outline-dark active"><input type="radio" name="options" id="passage_text" autocomplete="off" checked=""> Passage Text</label></div>
+                    <!-- Passage Text -->
+                    <div id="sentence_list_example"><div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    </div><div class="mb-3 border"><p><span class="btn token token_button">He</span><span class="whitespace noselect"> </span><span class="btn token token_button">was</span><span class="whitespace noselect"> </span><span class="btn token token_button btn-event font-weight-bold">hired</span><span class="whitespace noselect"> </span><span class="btn token token_button">as</span><span class="whitespace noselect"> </span><span class="btn token token_button">a</span><span class="whitespace noselect"> </span><span class="btn token token_button">Research</span><span class="whitespace noselect"> </span><span class="btn token token_button">Scientist</span><span class="whitespace noselect"> </span><span class="btn token token_button">by</span><span class="whitespace noselect"> </span><span class="btn token token_button">Microsoft</span><span class="whitespace noselect"> </span><span class="btn token token_button">.</span><span class="whitespace noselect"> </span></p></div></div>
+                    <!-- Active Role and Answer -->
+                    <div id="role_info_example">
+                        <div class="mb-1">
+                            <i class="me-2 mt-1">Active Role: </i>
+                            <div class="btn p-1 me-4 mr-4 mt-1 font-weight-bold btn-secondary">Employee</div>
+                        </div>
+                    </div>
+                    <!-- Display roles -->
+                    <div class="clearfix">
+                        <div class="float-left"><i class="mr-2 mt-1">Roles:</i>
+                            <div class=" btn wrap_btn mr-2 mt-1 btn-secondary font-weight-bold">Employee</div>
+                            <div class=" btn wrap_btn mr-2 mt-1 btn-outline-secondary">Employer</div>
+                            <div class=" btn wrap_btn mr-2 mt-1 btn-outline-secondary">Task</div>
+                            <div class=" btn wrap_btn mr-2 mt-1 btn-outline-secondary">Position</div>
+                            <div class=" btn wrap_btn mr-2 mt-1 btn-outline-secondary">Field</div>
+                        </div>
+                        <div class="float-right">
+                            <div class=" btn wrap_btn mr-2 mt-1 btn-outline-dark">previous role</div>
+                            <div class=" btn wrap_btn mr-2 mt-1 btn-outline-dark">next role</div>
+                        </div>
+                    </div>
+                    <!-- Role Definition and Example -->
+                    <div class="clearfix">
+                        <div class="mb-2 float-left">
+                            <i class="mr-2 mt-1">Role Definition:</i>
+                        </div>
+                        The person whom the <fen>Employer</fen> takes on as an <fen>Employee</fen>, obligating them to perform some <fen>Task</fen> in order to receive <fen>Compensation</fen>.
+                        <div class="clearfix"></div>
+                        <div class="mb-2 float-left">
+                            <i class="mr-2 mt-1">Role Example:</i>
+                        </div>
+                        <fex name="Employee">I</fex> was just hired yesterday!
+                    </div>
+                </div>
+                <p>
+                    You can click on buttons for different roles to see its definition and example. Each role has a fixed definition and a fixed example. The definition and example of the active role is displayed below the list of all roles.
+
+                </p>
+                <!-- 2.1 Role Annotation Examples -->
+                <!-- 2.1.1: Annotated Role: Employee -->
+                <p> You can click on the "next role" Button to activate the next role or alternatively just click on any of the Roles to activate that role for annotation.</p>
+                <!-- Annotated Role: Position -->
+                <p> Below is the definition and example for the role "Position":</p>
+                <div class="card card-body">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons"><label for="passage_text" id="passage_toggle_example" class="btn btn-outline-dark active"><input type="radio" name="options" id="passage_text" autocomplete="off" checked=""> Passage Text</label></div>
+                    <!-- Passage Text -->
+                    <div id="sentence_list_example"><div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    </div><div class="mb-3 border"><p><span class="btn token token_button">He</span><span class="whitespace noselect"> </span><span class="btn token token_button">was</span><span class="whitespace noselect"> </span><span class="btn token token_button btn-event font-weight-bold">hired</span><span class="whitespace noselect"> </span><span class="btn token token_button">as</span><span class="whitespace noselect"> </span><span class="btn token token_button">a</span><span class="whitespace noselect"> </span><span class="btn token token_button">Research</span><span class="whitespace noselect"> </span><span class="btn token token_button">Scientist</span><span class="whitespace noselect"> </span><span class="btn token token_button">by</span><span class="whitespace noselect"> </span><span class="btn token token_button">Microsoft</span><span class="whitespace noselect"> </span><span class="btn token token_button">.</span><span class="whitespace noselect"> </span></p></div></div>
+                    <!-- Active Role and Answer -->
+                    <div id="role_info_example">
+                        <div class="mb-1">
+                            <i class="me-2 mt-1">Active Role: </i>
+                            <div class="btn p-1 me-4 mr-4 mt-1 font-weight-bold btn-secondary">Position</div>
+                    
+                        <div class="mb-2 float-right"></div>
+                    </div>
+                    <!-- Display roles -->
+                    <div class="clearfix"><div class="float-left"><i class="mr-2 mt-1">Roles:</i><div class="select_role_button btn wrap_btn mr-2 mt-1 btn-outline-secondary">Employee</div><div class="select_role_button btn wrap_btn mr-2 mt-1 btn-outline-secondary">Employer</div><div class="select_role_button btn wrap_btn mr-2 mt-1 btn-outline-secondary">Task</div><div class="select_role_button btn wrap_btn mr-2 mt-1 btn-secondary font-weight-bold">Position</div><div class="select_role_button btn wrap_btn mr-2 mt-1 btn-outline-secondary">Field</div></div>
+                    <div class="float-right">
+                        <div class=" btn wrap_btn mr-2 mt-1 btn-outline-dark">previous role</div>
+                        <div class=" btn wrap_btn mr-2 mt-1 btn-outline-dark">next role</div>
+                    </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="mb-2 float-left"><i class="mr-2 mt-1">Role Definition:</i>
+                        </div>The label given to a particular type of employment.
+                        <div class="clearfix"></div>
+                        <div class="mb-2 float-left"><i class="mr-2 mt-1">Role Example:</i></div>Look, I wasn't hired <fex name="Posit">as your waitress</fex>!</div></div>
+                </div>
+
+                <p>Roles are only provided to help you understand the definition of an event type better in case it is not clear from the event definition and the event example itself. Feel free to ignore the roles if the event type makes sense to you just by reading the event definition and event example.</p>
+            
+                </div>
+                
+            </div>
+
+            <!-- ###################################### -->
+            <!-- 3. Does the Source Text contain the highlighted event? -->
+             <!-- ###################################### -->
+             <h2>2. Does the Source Text contain the highlighted event? <a href="javascript:toggle_role_source();" id="displaytext_roles_source" style="font-size: 80%;">(hide)</a></h2>
+
+             <div id="examples_roles_source">
+                <p> The <b>Passage Text</b> is obtained from a source that we call the <b>Source Text</b>. Ideally, the Source Text should contain the situation highlighted in the Passage Text, but sometimes we have errors in source extraction which might lead the situation in Passage Text to not be present in the Source Text. To identify this, we want you to check whether the Source Text contains the event that is highlighted in the Passage Text. </p>
+
+                <p> Let us look at the Source Text of our running example to verify this. </p>
+                <div class="card card-body">
+                <div class="row pt-3 pb-3">
+                    <div class="col-9">
+                        <div id="sentence_list_example"><div class="btn-group btn-group-toggle" data-toggle="buttons"><label for="passage_text" id="passage_toggle" class="btn btn-outline-dark"><input type="radio" name="options" id="passage_text" autocomplete="off" checked=""> Passage Text</label><label for="source_text" id="source_toggle" class="btn btn-outline-dark active"><input type="radio" name="options" id="source_text" autocomplete="off"> Source Text</label></div><div class="mb-3 border"><p><span class="btn token token_button">John</span><span class="whitespace noselect"> </span><span class="btn token token_button">Smith</span><span class="whitespace noselect"> </span><span class="btn token token_button">is</span><span class="whitespace noselect"> </span><span class="btn token token_button">a</span><span class="whitespace noselect"> </span><span class="btn token token_button">recent</span><span class="whitespace noselect"> </span><span class="btn token token_button">graduate</span><span class="whitespace noselect"> </span><span class="btn token token_button">of</span><span class="whitespace noselect"> </span><span class="btn token token_button">the</span><span class="whitespace noselect"> </span><span class="btn token token_button">University</span><span class="whitespace noselect"> </span><span class="btn token token_button">of</span><span class="whitespace noselect"> </span><span class="btn token token_button">Washington</span><span class="whitespace noselect"> </span><span class="btn token token_button">.</span><span class="whitespace noselect"> </span><span class="btn token token_button">He</span><span class="whitespace noselect"> </span><span class="btn token token_button">interned</span><span class="whitespace noselect"> </span><span class="btn token token_button">at</span><span class="whitespace noselect"> </span><span class="btn token token_button">Microsoft</span><span class="whitespace noselect"> </span><span class="btn token token_button">Research</span><span class="whitespace noselect"> </span><span class="btn token token_button">in</span><span class="whitespace noselect"> </span><span class="btn token token_button">Seattle</span><span class="whitespace noselect"> </span><span class="btn token token_button">,</span><span class="whitespace noselect"> </span><span class="btn token token_button">Washington</span><span class="whitespace noselect"> </span><span class="btn token token_button">.</span><span class="whitespace noselect"> </span><span class="btn token token_button">His</span><span class="whitespace noselect"> </span><span class="btn token token_button">research</span><span class="whitespace noselect"> </span><span class="btn token token_button">interests</span><span class="whitespace noselect"> </span><span class="btn token token_button">include</span><span class="whitespace noselect"> </span><span class="btn token token_button">machine</span><span class="whitespace noselect"> </span><span class="btn token token_button">learning</span><span class="whitespace noselect"> </span><span class="btn token token_button">,</span><span class="whitespace noselect"> </span><span class="btn token token_button">computer</span><span class="whitespace noselect"> </span><span class="btn token token_button">vision</span><span class="whitespace noselect"> </span><span class="btn token token_button">,</span><span class="whitespace noselect"> </span><span class="btn token token_button">and</span><span class="whitespace noselect"> </span><span class="btn token token_button">natural</span><span class="whitespace noselect"> </span><span class="btn token token_button">language</span><span class="whitespace noselect"> </span><span class="btn token token_button">processing</span><span class="whitespace noselect"> </span><span class="btn token token_button">.</span><span class="whitespace noselect"> </span><span class="btn token token_button">After</span><span class="whitespace noselect"> </span><span class="btn token token_button">6</span><span class="whitespace noselect"> </span><span class="btn token token_button">rounds</span><span class="whitespace noselect"> </span><span class="btn token token_button">of</span><span class="whitespace noselect"> </span><span class="btn token token_button">interviewing</span><span class="whitespace noselect"> </span><span class="btn token token_button">,</span><span class="whitespace noselect"> </span><span class="btn token token_button">he</span><span class="whitespace noselect"> </span><span class="btn token token_button">was</span><span class="whitespace noselect"> </span><span class="btn token token_button">employed</span><span class="whitespace noselect"> </span><span class="btn token token_button">as</span><span class="whitespace noselect"> </span><span class="btn token token_button">a</span><span class="whitespace noselect"> </span><span class="btn token token_button">Research</span><span class="whitespace noselect"> </span><span class="btn token token_button">Scientist</span><span class="whitespace noselect"> </span><span class="btn token token_button">by</span><span class="whitespace noselect"> </span><span class="btn token token_button">Microsoft</span><span class="whitespace noselect"> </span><span class="btn token token_button">to</span><span class="whitespace noselect"> </span><span class="btn token token_button">work</span><span class="whitespace noselect"> </span><span class="btn token token_button">on</span><span class="whitespace noselect"> </span><span class="btn token token_button">their</span><span class="whitespace noselect"> </span><span class="btn token token_button">new</span><span class="whitespace noselect"> </span><span class="btn token token_button">chatbot</span><span class="whitespace noselect"> </span><span class="btn token token_button">.</span><span class="whitespace noselect"> </span></p></div></div>
+                        
+            
+                    </div>
+        
+                </div>
+                </div>
+
+                <p>The last sentence of the source text above mentions the hiring event (<i>he was employed</i>) that was highlighted in the Passage Text. So for this example, we would select "Yes" for the question:</p>
+
+                <div class="card">
+                    <p style="color:#FF0000"> Does the Source Text contain the exact same event highlighted in the Passage Text?
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons"><label for="source_contains_passage_event_yes_" id="source_contains_passage_event_yes_example" class="btn btn-outline-dark active"><input type="radio" name="options" id="passage_text" autocomplete="off" checked>Yes</label><label for="source_contains_passage_event_no_" id="source_contains_passage_event_no_example" class="btn btn-outline-dark"><input type="radio" name="options" id="source_text" autocomplete="off">No</label></div> 
+                       </p>
+                </div>
+
+                <p>Note that even though a different word (<i>employed</i>) is used to describe the same event in the passage (<i>hired</i>), we still selected "Yes" since the event described is the same event.</p>
+                
+                <p> On the other hand, if the source Text were something like the below: </p>
+                <div class="card card-body">
+                    <div class="row pt-3 pb-3">
+                        <div class="col-9">
+                            <div id="sentence_list_example"><div class="btn-group btn-group-toggle" data-toggle="buttons"><label for="passage_text" id="passage_toggle" class="btn btn-outline-dark"><input type="radio" name="options" id="passage_text" autocomplete="off" checked=""> Passage Text</label><label for="source_text" id="source_toggle" class="btn btn-outline-dark active"><input type="radio" name="options" id="source_text" autocomplete="off"> Source Text</label></div><div class="mb-3 border"><p><span class="btn token token_button">John</span><span class="whitespace noselect"> </span><span class="btn token token_button">Smith</span><span class="whitespace noselect"> </span><span class="btn token token_button">is</span><span class="whitespace noselect"> </span><span class="btn token token_button">a</span><span class="whitespace noselect"> </span><span class="btn token token_button">recent</span><span class="whitespace noselect"> </span><span class="btn token token_button">graduate</span><span class="whitespace noselect"> </span><span class="btn token token_button">of</span><span class="whitespace noselect"> </span><span class="btn token token_button">the</span><span class="whitespace noselect"> </span><span class="btn token token_button">University</span><span class="whitespace noselect"> </span><span class="btn token token_button">of</span><span class="whitespace noselect"> </span><span class="btn token token_button">Washington</span><span class="whitespace noselect"> </span><span class="btn token token_button">.</span><span class="whitespace noselect"> </span><span class="btn token token_button">He</span><span class="whitespace noselect"> </span><span class="btn token token_button">interned</span><span class="whitespace noselect"> </span><span class="btn token token_button">at</span><span class="whitespace noselect"> </span><span class="btn token token_button">Microsoft</span><span class="whitespace noselect"> </span><span class="btn token token_button">Research</span><span class="whitespace noselect"> </span><span class="btn token token_button">in</span><span class="whitespace noselect"> </span><span class="btn token token_button">Seattle</span><span class="whitespace noselect"> </span><span class="btn token token_button">,</span><span class="whitespace noselect"> </span><span class="btn token token_button">Washington</span><span class="whitespace noselect"> </span><span class="btn token token_button">.</span><span class="whitespace noselect"> </span><span class="btn token token_button">His</span><span class="whitespace noselect"> </span><span class="btn token token_button">research</span><span class="whitespace noselect"> </span><span class="btn token token_button">interests</span><span class="whitespace noselect"> </span><span class="btn token token_button">include</span><span class="whitespace noselect"> </span><span class="btn token token_button">machine</span><span class="whitespace noselect"> </span><span class="btn token token_button">learning</span><span class="whitespace noselect"> </span><span class="btn token token_button">,</span><span class="whitespace noselect"> </span><span class="btn token token_button">computer</span><span class="whitespace noselect"> </span><span class="btn token token_button">vision</span><span class="whitespace noselect"> </span><span class="btn token token_button">,</span><span class="whitespace noselect"> </span><span class="btn token token_button">and</span><span class="whitespace noselect"> </span><span class="btn token token_button">natural</span><span class="whitespace noselect"> </span><span class="btn token token_button">language</span><span class="whitespace noselect"> </span><span class="btn token token_button">processing</span><span class="whitespace noselect"> </span><span class="btn token token_button">.</span><span class="whitespace noselect"> </span><span class="btn token token_button">Last</span><span class="whitespace noselect"> </span><span class="btn token token_button">year</span><span class="whitespace noselect"> </span><span class="btn token token_button">,</span><span class="whitespace noselect"> </span><span class="btn token token_button">John's</span><span class="whitespace noselect"> </span><span class="btn token token_button">sister</span><span class="whitespace noselect"> </span><span class="btn token token_button">,</span><span class="whitespace noselect"> </span><span class="btn token 
+                            token_button">Mary</span><span class="whitespace noselect"> </span><span class="btn token 
+                            token_button">,</span><span class="whitespace noselect"> </span><span class="btn token token_button">was</span><span class="whitespace noselect"> </span><span class="btn token token_button">hired</span><span class="whitespace noselect"> </span><span class="btn token token_button">as</span><span class="whitespace noselect"> </span><span class="btn token token_button">a</span><span class="whitespace noselect"> </span><span class="btn token token_button">Research</span><span class="whitespace noselect"> </span><span class="btn token token_button">Scientist</span><span class="whitespace noselect"> </span><span class="btn token token_button">by</span><span class="whitespace noselect"> </span><span class="btn token token_button">Google</span><span class="whitespace noselect"> </span><span class="btn token token_button">.</span><span class="whitespace noselect"> </span></p></div></div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <p>Even though there is a mention of a hiring event in the last sentence of the source text above, it is not the same event that is described in the passage text (Check the Passage Text in Section 1). The passage text mentions the event of hiring John, whereas the source above mentions the event of hiring John's sister. So for this source text, we would select "No" for the question:</p>
+
+                    <div class="card">
+                        <p style="color:#FF0000"> Does the Source Text contain the exact same event highlighted in the Passage Text?
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons"><label for="source_contains_passage_event_yes_" id="source_contains_passage_event_yes" class="btn btn-outline-dark"><input type="radio" name="options" id="passage_text" autocomplete="off" checked>Yes</label><label for="source_contains_passage_event_no_" id="source_contains_passage_event_no" class="btn btn-outline-dark active"><input type="radio" name="options" id="source_text" autocomplete="off">No</label></div> 
+                           </p>
+                    </div>
+
+            </div>
+             
+            <!-- End of instructions button -->
+            <div class="text-center">
+                <button id="toggle_instructions" class="btn wrap_btn btn-lg btn-info" type="button" data-toggle="collapse" data-target="#instructions" aria-expanded="false" aria-controls="instructions">Collapse Instructions</button>
+            </div>
+
+    </div>
+    
+    
+    <!-- End of instructions -->
+
+        <!-- begin main interface -->
+    <div class="row pt-3 pb-3">
+        <div class="col-9">
+            <div id="event_list"></div>
+            <div id="sentence_list"></div>
+            <div id="role_info" ></div>
+
+        </div>
+
+        <!-- <div class="col-3">
+            <div class=" border p-3 sticky-top">
+                <div id="candidate_list" class="btn-group-vertical"></div>
+            </div>
+        </div> -->
+    </div>
+    <!-- end main interface -->
+
+        <div id="alerts"></div>
+
+        <!-- Keyboard shortcuts -->
+        <div class="modal fade" id="keyboard_shortcuts" tabindex="-1" role="dialog" aria-labelledby="keyboard_shortcuts_title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="keyboard_shortcuts_title">Keyboard Shortcuts</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <tr>
+                                <td><span class="btn btn-light p-1 border">Tab</span></td>
+                                <td>Go to the next role </td>
+                            </tr>
+                            <tr>
+                                <td><span class="btn btn-light p-1 border mr-2">Shift</span><span class="btn btn-light p-1 border">Tab</span></td>
+                                <td>Go to the previous role</td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="btn btn-light p-1 border">i</span></td>
+                                <td>Show/hide instructions</td>
+                            </tr>
+                            <tr>
+                                <td><span class="btn btn-light p-1 border">?</span></td>
+                                <td>Show/hide keyboard shortcuts</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+     <div class="text-center"><input id="submitButton" class="btn btn-outline-primary" type="submit" value="Submit" /></div>
