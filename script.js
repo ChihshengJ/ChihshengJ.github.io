@@ -31,14 +31,22 @@ class SectionManager {
         this.toggleMobileMenu(),
       );
     }
-
     window.addEventListener("popstate", () => this.handlePopState());
     document.addEventListener("keydown", (e) => this.handleKeyDown(e));
   }
 
+  initTiltForSection(section) {
+    const items = section.querySelectorAll(".content-item");
+    if (items.length > 0) {
+      VanillaTilt.init(items, {
+        max: 3,
+        speed: 10,
+      });
+    }
+  }
+
   handleNavClick(e) {
     e.preventDefault();
-
     const targetSection = e.currentTarget.dataset.section;
     if (
       !targetSection ||
@@ -47,7 +55,6 @@ class SectionManager {
     ) {
       return;
     }
-
     this.closeMobileMenu();
     this.navigateToSection(targetSection);
   }
@@ -77,17 +84,15 @@ class SectionManager {
         targetSection.classList.remove("entering");
       });
       this.currentSection = sectionId;
+
       this.updateNavActiveState(sectionId);
       window.scrollTo({ top: 0, behavior: "instant" });
       setTimeout(() => {
         this.isTransitioning = false;
         document.body.classList.remove("transitioning");
       }, this.transitionDuration);
+      this.initTiltForSection(targetSection);
     }, this.transitionDuration / 2);
-    VanillaTilt.init(targetSection.querySelectorAll(".content-item"), {
-      max: 3,
-      speed: 10,
-    });
   }
 
   showSection(sectionId, animate = true) {
@@ -108,6 +113,7 @@ class SectionManager {
     if (window.location.hash.slice(1) !== sectionId) {
       history.replaceState({ section: sectionId }, "", `#${sectionId}`);
     }
+    this.initTiltForSection(section);
   }
 
   updateNavActiveState(sectionId) {
