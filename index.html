@@ -1,212 +1,418 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Personal Website</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="mediaqueries.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chihsheng Jin</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
     <header class="site-header">
-            <div class="wrapper">
-                <div class="logo">Chihsheng Jin</div>
-                <nav id="desktop-nav">
-                <div>
-                    <ul class="nav-links">
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#experience">Experience</a></li>
-                        <li><a href="template_music.html">Other</a></li>
-                    </ul>
-                </div>
-                </nav>
-                <nav id="hamburger-nav">
-                <div class="hamburger-menu">
-                    <div class="hamburger-icon" onclick="toggleMenu()">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <div class="menu-links">
-                        <li><a href="#about" onclick="toggleMenu()">About</a></li>
-                        <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-                        <li><a href="" onclick="toggleMenu()">Other</a></li>
-                    </div>
-                </div>
-                </nav>
-            </div>
+      <nav class="nav">
+        <a href="#about" class="nav-logo" data-section="about">Chihsheng Jin</a>
+        <ul class="nav-links">
+          <li>
+            <a href="#about" data-section="about" class="nav-link active"
+              >About</a
+            >
+          </li>
+          <li>
+            <a href="#research" data-section="research" class="nav-link"
+              >Research</a
+            >
+          </li>
+          <li>
+            <a href="#projects" data-section="projects" class="nav-link"
+              >Projects</a
+            >
+          </li>
+          <li>
+            <a href="#experience" data-section="experience" class="nav-link"
+              >Experience</a
+            >
+          </li>
+          <li>
+            <a href="#other" data-section="other" class="nav-link">Other</a>
+          </li>
+        </ul>
+
+        <!-- Mobile menu button -->
+        <button class="mobile-menu-btn" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+
+      <!-- Mobile navigation -->
+      <div class="mobile-nav">
+        <ul class="mobile-nav-links">
+          <li>
+            <a href="#about" data-section="about" class="mobile-nav-link active"
+              >About</a
+            >
+          </li>
+          <li>
+            <a href="#research" data-section="research" class="mobile-nav-link"
+              >Research</a
+            >
+          </li>
+          <li>
+            <a href="#projects" data-section="projects" class="mobile-nav-link"
+              >Projects</a
+            >
+          </li>
+          <li>
+            <a
+              href="#experience"
+              data-section="experience"
+              class="mobile-nav-link"
+              >Experience</a
+            >
+          </li>
+          <li>
+            <a href="#other" data-section="other" class="mobile-nav-link"
+              >Other</a
+            >
+          </li>
+        </ul>
+      </div>
     </header>
-    <section id="profile">
-        <div class="wrapper">
-            <div class="section__text">
-                <p><img src="./assets/profile-pic.JPG" alt="Profile Pic" class="profile_pic"></p>
-                <p>Hello! I'm Chihsheng Jin ([ʒɯ ʃəŋ]) (he/him/his). In 2023, I received my Bachelor's degree in Chinese Language at Fudan University, 
-                  where I was advised by <a href="https://sites.google.com/site/jeffreychien08">Prof. Yu-Fu Chien</a>. I've also received an Associate degree
-                  in French from Shanghai International Studies University in 2022. </br> In 2025, I received my Master's degree in Computational Linguistics,
-                  advised by <a href="https://aaronstevenwhite.io">Prof. Aaron Steven White</a>, while I was working at the <a href="http://factslab.io">FACTS.lab</a>.</br> 
-                  My research interests are language modeling, formal semantics, information extraction and psycholinguistics. </br> 
-                  You can check out my CV <a href="./assets/cv.pdf">here</a>.</p>
-            </div>
-        </div>
-    </section>
 
-    <section id="contact-desktop">
-        <div class="wrapper">
-        <div class="contact-info-upper-container">
-            <div class="contact-info-container">
-            <img
-                src="./assets/email.png"
-                alt="Email icon"
-                class="icon contact-icon email-icon"
-            />
-            <p><a href="mailto:chihsheng3421@gmail.com">chihsheng3421 (at) gmail (dot) com</a></p>
+    <!-- Main content area -->
+    <main class="main-content">
+      <section id="about" class="section active" data-section="about">
+        <div class="section-inner">
+          <div class="about-layout">
+            <div class="about-image">
+              <img
+                src="./assets/profile-pic.JPG"
+                alt="Chihsheng Jin"
+                class="profile-pic"
+              />
             </div>
-            <div class="contact-info-container">
-            <img
-                src="./assets/linkedin.png"
-                alt="LinkedIn icon"
-                class="icon contact-icon"
-            />
-            <p><a href="https://www.linkedin.com/in/chihsheng-jin-43296928a">LinkedIn</a></p>
-            </div>
-            <div class="contact-info-container">
-            <img
-                src="./assets/github.png"
-                alt="Github icon"
-                class="icon contact-icon"
-            />
-            <p><a href="https://github.com/ChihshengJ">Github</a></p>
-            </div>
-        </div>
-        </div>
-    </section>
+            <div class="about-content">
+              <h1 class="about-name">Chihsheng Jin</h1>
+              <p class="about-pronunciation">
+                [ʈ͡ʂɯ ʂəŋ]&nbsp;&nbsp;·&nbsp;&nbsp;he/him
+              </p>
 
-    <section id="contact-mobile">
-        <div class="contact-mob-info-upper-container">
-            <div class="contact-mob-info-container">
-            <a href="mailto:chihsheng3421@gmail.com">
-            <img
-                src="./assets/email.png"
-                alt="Email icon"
-                class="contact-mob-icon email-icon"
-            />
-            </a>
-            </div>
-            <div class="contact-mob-info-container">
-            <a href="https://www.linkedin.com/in/chihsheng-jin-43296928a">
-            <img
-                src="./assets/linkedin.png"
-                alt="LinkedIn icon"
-                class="contact-mob-icon"
-            />
-            </a>
-            </div>
-            <div class="contact-mob-info-container">
-            <a href="https://github.com/ChihshengJ">
-            <img
-                src="./assets/github.png"
-                alt="Github icon"
-                class="contact-mob-icon"
-            />
-            </a>
-            </div>
-        </div>
-    </section>
+              <div class="about-bio">
+                <p>
+                  In 2023, I received my Bachelor's degree in Chinese Language
+                  at Fudan University, where I was advised by
+                  <a
+                    href="https://sites.google.com/site/jeffreychien08"
+                    target="_blank"
+                    rel="noopener"
+                    >Prof. Yu-Fu Chien</a
+                  >. I also received an Associate degree in French from Shanghai
+                  International Studies University in 2022.
+                </p>
 
-    <section id="experience">
-        <h1 class="title">Experience</h1>
-            <div class="about-containers">
-                  <div class="details-container">
-                      <h2 class="experience-sub-title">Selected Research</h2>
-                      <div class="article-container">
-                          <article>
-                              <div class="article-container">
-                                  <h3>Cross-Document Event-Keyed Summarization <a href="https://arxiv.org/abs/2410.14795">[arxiv]</a></h3>
-                                  <p>William Walden, Pavlo Kuchmiichuk, Alexander Martin, Chihsheng Jin, Angela Cao, Claire Sun, Curisia Allen, Aaron Steven White</p>
-                                  <p>In this project we constructed a cross-document summarization dataset on top of the <a href='https://github.com/FACTSlab/FAMuS'>FAMuS</a> (Frame across multiple Sources) dataset. 
-                                      Results from extensive experiments show that cross-document summarization is a non-trivial task for language models, and smaller models can even outperform larger models when being fine-tuned with the dataset. 
-                                  </p>
-                                  <p>Presented at <a href='https://xllms.github.io/#schedule'>XLLM@ACL2025</a> and <a href="https://peer-workshop.github.io/program/2025/">PEER2025</a> <a href="./assets/SEAMUS_slides.pptx">[Slides]</a>.</p>
-                              </div>
-                              <div class="article-container">
-                                  <h3>Dynamics in the phonological encoding of bilingual speech production <a href="./assets/senior_thesis.pdf">[pdf]</a></h3>
-                                  <p>Senior thesis. I used a character-naming paradigm to test whether the phonological mapping status of cognates in Mandarin and Shanghai Dialect would affect the speech production process. 
-                                      Besides the most common cognate facilitation effect, there are two novel findings that have yet to be discovered in this field. First, the phonological mapping complexity between the two 
-                                      languages interferes with the speech production. Second, whether the phonemes are the most frequent match for the latent language also affects the speech production. More specifically, if 
-                                      the Mandarin phoneme in the trial is the most frequent match for the Shanghai Dialect phoneme (absent in the experiment), the cognate facilitation effect disappears.
-                                      I decided against publishing this manuscript because this experiment was conducted during a COVID lockdown, so the sample size is extremely limited.
-                                  </p>
-                              </div>
-                          </article>
-                      </div>
-                  </div>
-                <div class="details-container">
-                    <h2 class="experience-sub-title">Projects</h2>
-                    <div class="article-container">
-                        <article>
-                            <div class="article-container">
-                                <h3>Agenda-based Parser for Multiple Context-free Grammars <a href="https://github.com/ChihshengJ/MCFG-parser">[Github]</a></h3>
-                                <p>This is an agenda-based parsing Python module for multiple context-free grammar. 
-                                    Multiple context-free grammar is a class of grammars that is strictly more expressive than context-free grammar, 
-                                    which can be used for <a href="https://en.wikipedia.org/wiki/Cross-serial_dependencies">cross-serial dependencies</a>, agreement within relative clauses, etc.
-                                </p>
-                            </div>
-                            <div class="article-container">
-                                <h3>Retrieval-Augmented Event Extraction <a href="https://github.com/ChihshengJ/retrieval-augmented-event-extraction">[Github]</a></h3>
-                                <p>I conducted extensive experiments on GPT-4o and Claude Sonnet 3.5's capability of extracting event roles from the FAMuS dataset using various prompt strategies. Using the CEAF family of metrics, 
-                                    the results suggest that large language models can not extract roles accurately and truthfully, indicating that they do not have human-level event understanding. However, after some post-processing,
-                                    the extractions can still be useful for some applications.</p>
-                                <p>Check out <a href='./assets/master_essay_v1.pdf'>the paper</a> if you're interested about this study and the results.</p>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-                <div class="details-container">
-                    <h2 class="experience-sub-title">Skills</h2>
-                    <div class="article-container">
-                        <article id="skills-article">
-                            <div class="skills-container">
-                                <h3>Programming Languages</h3>
-                                <p>Python (& Data Science toolkits),</br> PyTorch, Lightning</br> LaTeX, JavaScript, CSS, HTML</p>
-                            </div>
-                            <div class="skills-container">
-                                <h3>Production Software</h3>
-                                <p>Ableton Live (Professional Mixing&Mastering), Photoshop, Indesign, Lightroom, Praat</p>
-                            </div>
-                            <div class="skills-container">
-                                <h3>If you are interested in audio engineering services check out <a href="/template_music">this page</a>!</h3>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-                <div class="details-container">
-                    <h2 class="experience-sub-title">Professional Experiences</h2>
-                    <div class="article-container">
-                        <article>
-                            <div>
-                                <h3>FACTS.Lab</h3>
-                                <p>Jun 2024 - Now</p>
-                                <p>At FACTS.Lab, I worked on a series projects related to structured representations of events, event extraction and event retrieval.</p>
-                            </div>
-                            <div>
-                                <h3>Shanghai AI Lab</h3>
-                                <p>Jun 2022 - Oct 2022</p>
-                                <p>I worded as a project management intern and used my coding skills to process files, which made our workflow more efficient.</p>
-                            </div>
-                            <div>
-                                <h3>Fudan Yayan</h3>
-                                <p>Jun 2020 - Sep 2022</p>
-                                <p>Fudan Yayan is bimonthly in-house newspaper dedicated to news on language regulations and language research in Fudan University. I worked as a chief editor and designer there for two years. You can check out our works <a href="">here</a> (I'm sorry that the contents are in Chinese and we don't upload the complete issues online).</p>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-        </div>
-    </section>
+                <p>
+                  In 2025, I received my Master's degree in Computational
+                  Linguistics, advised by
+                  <a
+                    href="https://aaronstevenwhite.io"
+                    target="_blank"
+                    rel="noopener"
+                    >Prof. Aaron Steven White</a
+                  >, while working at the
+                  <a href="http://factslab.io" target="_blank" rel="noopener"
+                    >FACTS.lab</a
+                  >.
+                </p>
 
-    <footer>
-        <p>Thank you for scrolling down here!</p>
+                <p>
+                  My research interests are language modeling, formal semantics,
+                  information extraction and psycholinguistics.
+                </p>
+
+                <p>On a sidenote, my preferred name is Jin.</p>
+              </div>
+
+              <div class="about-links">
+                <a
+                  href="./assets/cv.pdf"
+                  class="about-link"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span class="link-text">Curriculum Vitae</span>
+                  <img class="link-icon" src="./assets/cv.svg" />
+                </a>
+                <a href="mailto:chihsheng3421@gmail.com" class="about-link">
+                  <span class="link-text">Email</span>
+                  <img class="link-icon" src="./assets/email.svg" />
+                </a>
+                <a
+                  href="https://github.com/ChihshengJ"
+                  class="about-link"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span class="link-text">GitHub</span>
+                  <img class="link-icon" src="./assets/github.svg" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/chihsheng-jin-43296928a"
+                  class="about-link"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span class="link-text">LinkedIn</span>
+                  <img class="link-icon" src="./assets/linkedin.svg" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="research" class="section" data-section="research">
+        <div class="section-inner">
+          <h2 class="section-title">
+            <img class="section-icon" src="./assets/research.svg" />
+            Research
+          </h2>
+
+          <div class="content-list">
+            <article class="content-item">
+              <div class="content-item-header">
+                <h3 class="content-item-title">
+                  Cross-Document Event-Keyed Summarization
+                </h3>
+                <a
+                  href="https://arxiv.org/abs/2410.14795"
+                  class="content-item-link"
+                  target="_blank"
+                  rel="noopener"
+                  >arXiv</a
+                >
+              </div>
+              <p class="content-item-meta">
+                William Walden, Pavlo Kuchmiichuk, Alexander Martin, Chihsheng
+                Jin, Angela Cao, Claire Sun, Curisia Allen, Aaron Steven White
+              </p>
+              <p class="content-item-desc">
+                We constructed a cross-document summarization dataset on top of
+                the
+                <a
+                  href="https://github.com/FACTSlab/FAMuS"
+                  target="_blank"
+                  rel="noopener"
+                  >FAMuS</a
+                >
+                dataset. Results from extensive experiments show that
+                cross-document summarization is a non-trivial task for language
+                models, and smaller models can even outperform larger models
+                when fine-tuned with the dataset.
+              </p>
+              <p class="content-item-venue">
+                Presented at
+                <a
+                  href="https://xllms.github.io/#schedule"
+                  target="_blank"
+                  rel="noopener"
+                  >XLLM@ACL2025</a
+                >
+                and
+                <a
+                  href="https://peer-workshop.github.io/program/2025/"
+                  target="_blank"
+                  rel="noopener"
+                  >PEER2025</a
+                >&nbsp;&nbsp;·&nbsp;&nbsp;<a
+                  href="./assets/SEAMUS_slides.pptx"
+                  target="_blank"
+                  rel="noopener"
+                  >Slides</a
+                >
+              </p>
+            </article>
+
+            <article class="content-item">
+              <div class="content-item-header">
+                <h3 class="content-item-title">
+                  Dynamics in the phonological encoding of bilingual speech
+                  production
+                </h3>
+                <a
+                  href="./assets/senior_thesis.pdf"
+                  class="content-item-link"
+                  target="_blank"
+                  rel="noopener"
+                  >PDF</a
+                >
+              </div>
+              <p class="content-item-meta">Senior thesis</p>
+              <p class="content-item-desc">
+                I used a character-naming paradigm to test whether the
+                phonological mapping status of cognates in Mandarin and Shanghai
+                Dialect would affect the speech production process. Besides the
+                common cognate facilitation effect, there are two novel
+                findings: the phonological mapping complexity between languages
+                interferes with speech production, and whether phonemes are the
+                most frequent match for the latent language also affects
+                production.
+              </p>
+              <p class="content-item-note">
+                Note: This experiment was conducted during a COVID lockdown with
+                limited sample size, so I decided against publishing.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section" data-section="projects">
+        <div class="section-inner">
+          <h2 class="section-title">
+            <img class="section-icon" src="./assets/projects.svg" />
+            Projects
+          </h2>
+
+          <div class="content-list">
+            <article class="content-item">
+              <div class="content-item-header">
+                <h3 class="content-item-title">Hover PDF Reader</h3>
+                <a
+                  href="https://github.com/ChihshengJ/hover"
+                  class="content-item-link"
+                  target="_blank"
+                  rel="noopener"
+                  >GitHub</a
+                >
+              </div>
+              <p class="content-item-desc">
+                A minimalist PDF reader extension designed for people who spend
+                way too much time reading academic papers in the browser. It
+                intentionally keeps only the most essential features, but aims
+                to make the actual experience of reading papers smoother,
+                faster, and more immersive.
+              </p>
+            </article>
+
+            <article class="content-item">
+              <div class="content-item-header">
+                <h3 class="content-item-title">
+                  Retrieval-Augmented Event Extraction
+                </h3>
+                <a
+                  href="https://github.com/ChihshengJ/retrieval-augmented-event-extraction"
+                  class="content-item-link"
+                  target="_blank"
+                  rel="noopener"
+                  >GitHub</a
+                >
+              </div>
+              <p class="content-item-desc">
+                I conducted extensive experiments on GPT-4o and Claude Sonnet
+                3.5's capability of extracting event roles from the FAMuS
+                dataset using various prompt strategies. Using CEAF metrics,
+                results suggest large language models cannot extract roles
+                accurately, indicating they lack human-level event
+                understanding. However, with post-processing, extractions can
+                still be useful for some applications.
+              </p>
+              <p class="content-item-venue">
+                <a
+                  href="./assets/master_essay_v1.pdf"
+                  target="_blank"
+                  rel="noopener"
+                  >Read the paper</a
+                >
+              </p>
+            </article>
+
+            <article class="content-item">
+              <div class="content-item-header">
+                <h3 class="content-item-title">
+                  Agenda-based Parser for Multiple Context-free Grammars
+                </h3>
+                <a
+                  href="https://github.com/ChihshengJ/MCFG-parser"
+                  class="content-item-link"
+                  target="_blank"
+                  rel="noopener"
+                  >GitHub</a
+                >
+              </div>
+              <p class="content-item-desc">
+                A Python module for parsing multiple context-free grammars. MCFG
+                is a class of grammars strictly more expressive than
+                context-free grammar, useful for
+                <a
+                  href="https://en.wikipedia.org/wiki/Cross-serial_dependencies"
+                  target="_blank"
+                  rel="noopener"
+                  >cross-serial dependencies</a
+                >, agreement within relative clauses, and more.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" class="section" data-section="experience">
+        <div class="section-inner">
+          <h2 class="section-title">
+            <img class="section-icon" src="./assets/experience.svg" />
+            Experience
+          </h2>
+
+          <div class="content-list">
+            <article class="content-item">
+              <div class="content-item-header">
+                <h3 class="content-item-title">FACTS.Lab</h3>
+                <span class="content-item-date">Jun 2024 — Present</span>
+              </div>
+              <p class="content-item-desc">
+                Working on a series of projects related to structured
+                representations of events, event extraction and event retrieval.
+              </p>
+            </article>
+
+            <article class="content-item">
+              <div class="content-item-header">
+                <h3 class="content-item-title">Shanghai AI Lab</h3>
+                <span class="content-item-date">Jun 2022 — Oct 2022</span>
+              </div>
+              <p class="content-item-desc">
+                Project management intern. Used coding skills to process files
+                and improve workflow efficiency.
+              </p>
+            </article>
+
+            <article class="content-item">
+              <div class="content-item-header">
+                <h3 class="content-item-title">Fudan Yayan</h3>
+                <span class="content-item-date">Jun 2020 — Sep 2022</span>
+              </div>
+              <p class="content-item-desc">
+                Chief editor and designer for a bimonthly in-house newspaper
+                dedicated to news on language regulations and language research
+                at Fudan University.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2025 Designed by me</p>
     </footer>
+
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
