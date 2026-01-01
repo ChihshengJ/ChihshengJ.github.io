@@ -165,7 +165,7 @@ a:hover {
 
 .nav-link {
   position: relative;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   color: var(--color-text-secondary);
   padding: var(--space-xs) 0;
   transition: color var(--duration-fast) var(--ease-out-quad);
@@ -271,9 +271,7 @@ a:hover {
   color: var(--color-text);
 }
 
-/* ==========================================
-   Main Content & Sections
-   ========================================== */
+/* Main Content & Sections */
 .main-content {
   min-height: 80vh;
   padding-top: var(--header-height);
@@ -281,27 +279,9 @@ a:hover {
 
 .section {
   display: none;
-  min-height: calc(100vh - var(--header-height) - 80px);
+  min-height: calc(100vh - var(--header-height));
   padding: var(--space-xl) var(--space-lg);
   opacity: 0;
-}
-
-/* scroll bar */
-.section::-webkit-scrollbar {
-  width: 5px;
-}
-
-.section::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-.section::-webkit-scrollbar-thumb {
-  background: rgba(150, 150, 150, 0.6);
-  border-radius: 40px;
-}
-
-.section::-webkit-scrollbar-thumb:hover {
-  background: #555;
 }
 
 .section.active {
@@ -421,25 +401,45 @@ a:hover {
 .about-bio p {
   margin-bottom: var(--space-md);
   opacity: 0;
-  transform: translateY(20px);
+  /* transform: translateY(20px); */
+}
+
+.about-bio p:nth-child(5) {
+  margin-bottom: 0;
+}
+
+.about-bio .line-decor {
+  width: 20rem;
+  height: auto;
+  opacity: 0;
 }
 
 .section.visible .about-bio p:nth-child(1) {
   animation: fadeInUp var(--duration-slow) var(--ease-out-expo) forwards;
-  animation-delay: 250ms;
+  animation-delay: 150ms;
 }
 
 .section.visible .about-bio p:nth-child(2) {
   animation: fadeInUp var(--duration-slow) var(--ease-out-expo) forwards;
-  animation-delay: 300ms;
+  animation-delay: 200ms;
 }
 
 .section.visible .about-bio p:nth-child(3) {
   animation: fadeInUp var(--duration-slow) var(--ease-out-expo) forwards;
-  animation-delay: 350ms;
+  animation-delay: 250ms;
 }
 
 .section.visible .about-bio p:nth-child(4) {
+  animation: fadeInUp var(--duration-slow) var(--ease-out-expo) forwards;
+  animation-delay: 300ms;
+}
+
+.section.visible .about-bio p:nth-child(5) {
+  animation: fadeInUp var(--duration-slow) var(--ease-out-expo) forwards;
+  animation-delay: 350ms;
+}
+
+.section.visible .about-bio .line-decor {
   animation: fadeInUp var(--duration-slow) var(--ease-out-expo) forwards;
   animation-delay: 400ms;
 }
@@ -494,41 +494,45 @@ a:hover {
   background-color: var(--color-bg);
   border: 1px solid var(--color-border-light);
   border-radius: 8px;
-  transition: all var(--duration-normal) var(--ease-out-expo);
+  transition:
+    border-color var(--duration-normal) var(--ease-out-expo),
+    box-shadow var(--duration-normal) var(--ease-out-expo);
   opacity: 0;
-  transform: translateY(20px);
 }
 
 .content-item:hover {
   border-color: var(--color-border);
-  transform: translate(1rem, 1rem);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Staggered animation for content items */
 .section.visible .content-item:nth-child(1) {
-  animation: fadeInUp var(--duration-slow) var(--ease-out-expo) forwards;
+  animation: fadeInUp var(--duration-slow) var(--ease-out-expo);
   animation-delay: 200ms;
+  opacity: 1;
 }
 
 .section.visible .content-item:nth-child(2) {
-  animation: fadeInUp var(--duration-slow) var(--ease-out-expo) forwards;
+  animation: fadeInUp var(--duration-slow) var(--ease-out-expo);
   animation-delay: 300ms;
+  opacity: 1;
 }
 
 .section.visible .content-item:nth-child(3) {
-  animation: fadeInUp var(--duration-slow) var(--ease-out-expo) forwards;
+  animation: fadeInUp var(--duration-slow) var(--ease-out-expo);
   animation-delay: 400ms;
+  opacity: 1;
 }
 
 .section.visible .content-item:nth-child(4) {
-  animation: fadeInUp var(--duration-slow) var(--ease-out-expo) forwards;
+  animation: fadeInUp var(--duration-slow) var(--ease-out-expo);
   animation-delay: 500ms;
+  opacity: 1;
 }
 
 .section.visible .content-item:nth-child(5) {
-  animation: fadeInUp var(--duration-slow) var(--ease-out-expo) forwards;
+  animation: fadeInUp var(--duration-slow) var(--ease-out-expo);
   animation-delay: 600ms;
+  opacity: 1;
 }
 
 .content-item-header {
@@ -552,7 +556,9 @@ a:hover {
   color: var(--color-text-tertiary);
   padding: var(--space-xs) var(--space-sm);
   border-radius: 4px;
-  transition: all var(--duration-fast) var(--ease-out-quad);
+  transition:
+    border-color var(--duration-fast) var(--ease-out-expo),
+    box-shadow var(--duration-fast) var(--ease-out-expo);
 }
 
 .content-item-link:hover {
@@ -592,9 +598,7 @@ a:hover {
   font-style: italic;
 }
 
-/* ==========================================
-   Footer
-   ========================================== */
+/* Footer */
 .site-footer {
   padding: var(--space-xl) var(--space-lg);
   text-align: center;
@@ -606,9 +610,7 @@ a:hover {
   color: var(--color-text-tertiary);
 }
 
-/* ==========================================
-   Animations
-   ========================================== */
+/* Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -700,4 +702,3 @@ a:hover {
     padding: var(--space-xl) var(--space-md);
   }
 }
-

@@ -54,83 +54,57 @@ class SectionManager {
 
   navigateToSection(sectionId, pushState = true) {
     if (this.isTransitioning || sectionId === this.currentSection) return;
-
     const targetSection = document.getElementById(sectionId);
     if (!targetSection) return;
-
     this.isTransitioning = true;
     document.body.classList.add("transitioning");
-
     if (pushState) {
       history.pushState({ section: sectionId }, "", `#${sectionId}`);
     }
-
     const currentSectionEl = document.getElementById(this.currentSection);
-
     if (currentSectionEl) {
       currentSectionEl.classList.add("exiting");
       currentSectionEl.classList.remove("visible");
     }
-
     setTimeout(() => {
       this.sections.forEach((section) => {
         section.classList.remove("active", "visible", "exiting", "entering");
       });
-
-      // Show target section
       targetSection.classList.add("active", "entering");
-
-      // Trigger reflow for animation
       void targetSection.offsetWidth;
-
-      // Make visible (triggers staggered animations)
       requestAnimationFrame(() => {
         targetSection.classList.add("visible");
         targetSection.classList.remove("entering");
       });
-
-      // Update current section
       this.currentSection = sectionId;
-
-      // Update nav active states
       this.updateNavActiveState(sectionId);
-
-      // Scroll to top
       window.scrollTo({ top: 0, behavior: "instant" });
-
-      // End transition
       setTimeout(() => {
         this.isTransitioning = false;
         document.body.classList.remove("transitioning");
       }, this.transitionDuration);
     }, this.transitionDuration / 2);
+    VanillaTilt.init(targetSection.querySelectorAll(".content-item"), {
+      max: 3,
+      speed: 10,
+    });
   }
 
   showSection(sectionId, animate = true) {
     const section = document.getElementById(sectionId);
     if (!section) return;
-
-    // Hide all sections
     this.sections.forEach((s) => {
       s.classList.remove("active", "visible");
     });
-
-    // Show target section
     section.classList.add("active");
-
     if (animate) {
-      // Small delay to trigger animation
       requestAnimationFrame(() => {
         section.classList.add("visible");
       });
     } else {
       section.classList.add("visible");
     }
-
-    // Update nav
     this.updateNavActiveState(sectionId);
-
-    // Update URL without triggering popstate
     if (window.location.hash.slice(1) !== sectionId) {
       history.replaceState({ section: sectionId }, "", `#${sectionId}`);
     }
@@ -149,7 +123,6 @@ class SectionManager {
   handlePopState() {
     const hash = window.location.hash.slice(1);
     const targetSection = hash || "about";
-
     if (document.getElementById(targetSection)) {
       this.navigateToSection(targetSection, false);
     }
@@ -172,7 +145,6 @@ class SectionManager {
       0,
       Math.min(sectionIds.length - 1, currentIndex + direction),
     );
-
     if (newIndex !== currentIndex) {
       this.navigateToSection(sectionIds[newIndex]);
     }
