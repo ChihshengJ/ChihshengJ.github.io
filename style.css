@@ -59,10 +59,6 @@ body {
   overflow-x: hidden;
 }
 
-body.no-scroll {
-  overflow: hidden;
-}
-
 /* Prevent scroll when section transitions */
 body.transitioning {
   overflow: hidden;
@@ -326,7 +322,6 @@ a:hover {
   color: var(--color-text);
   margin-bottom: var(--space-xl);
   opacity: 0;
-  transform: translateY(20px);
 }
 
 .section-icon {
@@ -459,7 +454,6 @@ a:hover {
 
 .section.visible .about-links {
   animation: fadeInUp var(--duration-slow) var(--ease-out-expo) forwards;
-  animation-delay: 400ms;
 }
 
 .about-link {
@@ -507,7 +501,7 @@ a:hover {
 
 .content-item:hover {
   border-color: var(--color-border);
-  transform: translate(5px, 5px);
+  transform: translate(1rem, 1rem);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -656,7 +650,7 @@ a:hover {
   animation: fadeIn var(--duration-slow) var(--ease-out-expo) forwards;
 }
 
-/* Responsive Design */
+/* Mobile style */
 @media (max-width: 640px) {
   :root {
     --header-height: 56px;
@@ -707,13 +701,3 @@ a:hover {
   }
 }
 
-/* Reduce motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}

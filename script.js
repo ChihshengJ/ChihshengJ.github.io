@@ -94,11 +94,6 @@ class SectionManager {
 
       // Update nav active states
       this.updateNavActiveState(sectionId);
-      if (sectionId === "about") {
-        document.body.classList.add("no-scroll");
-      } else {
-        document.body.classList.remove("no-scroll");
-      }
 
       // Scroll to top
       window.scrollTo({ top: 0, behavior: "instant" });
@@ -134,11 +129,6 @@ class SectionManager {
 
     // Update nav
     this.updateNavActiveState(sectionId);
-    if (sectionId === "about") {
-      document.body.classList.add("no-scroll");
-    } else {
-      document.body.classList.remove("no-scroll");
-    }
 
     // Update URL without triggering popstate
     if (window.location.hash.slice(1) !== sectionId) {
