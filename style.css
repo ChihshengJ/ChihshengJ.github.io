@@ -10,7 +10,7 @@
   --color-border-light: #d3cfcb;
 
   --font-serif: Georgia, serif;
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: BlinkMacSystemFont, sans-serif;
 
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
@@ -279,7 +279,7 @@ a:hover {
 
 .section {
   display: none;
-  min-height: calc(100vh - var(--header-height));
+  min-height: calc(100vh - var(--header-height) - 80);
   padding: var(--space-xl) var(--space-lg);
   opacity: 0;
 }
@@ -330,9 +330,7 @@ a:hover {
   animation: fadeInUp var(--duration-slow) var(--ease-out-expo) forwards;
 }
 
-/* ==========================================
-   About Section
-   ========================================== */
+/* About Section */
 
 .about-layout {
   display: flex;

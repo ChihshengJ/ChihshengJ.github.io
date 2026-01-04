@@ -40,7 +40,8 @@ class SectionManager {
     if (items.length > 0) {
       VanillaTilt.init(items, {
         max: 3,
-        speed: 10,
+        speed: 8,
+        gyroscope: true,
       });
     }
   }
