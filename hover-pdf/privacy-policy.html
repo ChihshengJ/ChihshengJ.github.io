@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hover PDF Reader — Privacy Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #111113;
+        --surface: #1c1c1e;
+        --border: rgba(255, 255, 255, 0.06);
+        --text: #e5e5ea;
+        --text-secondary: #8e8e93;
+        --accent: #a0a0b0;
+      }
+
+      body {
+        font-family:
+          "DM Sans",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .container {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 80px 24px 120px;
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 14px;
+        margin-bottom: 48px;
+        transition: color 0.2s;
+      }
+      .back-link:hover {
+        color: var(--text);
+      }
+      .back-link svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      h1 {
+        font-size: 32px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        margin-bottom: 8px;
+      }
+
+      .effective-date {
+        font-size: 14px;
+        color: var(--text-secondary);
+        margin-bottom: 48px;
+      }
+
+      .summary-box {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin-bottom: 48px;
+      }
+      .summary-box p {
+        font-size: 15px;
+        color: var(--accent);
+        font-weight: 500;
+      }
+
+      h2 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 40px;
+        margin-bottom: 12px;
+        letter-spacing: -0.01em;
+      }
+
+      p {
+        font-size: 15px;
+        color: var(--text-secondary);
+        margin-bottom: 16px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 16px;
+      }
+      ul li {
+        font-size: 15px;
+        color: var(--text-secondary);
+        padding-left: 20px;
+        position: relative;
+        margin-bottom: 8px;
+      }
+      ul li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 10px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(160, 160, 176, 0.3);
+      }
+
+      .divider {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 48px 0;
+      }
+
+      .contact-section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin-top: 40px;
+      }
+      .contact-section p {
+        margin-bottom: 0;
+      }
+      .contact-section a {
+        color: var(--text);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-color: rgba(255, 255, 255, 0.2);
+        transition: text-decoration-color 0.2s;
+      }
+      .contact-section a:hover {
+        text-decoration-color: rgba(255, 255, 255, 0.5);
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 48px 20px 80px;
+        }
+        h1 {
+          font-size: 26px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Update this link to your actual homepage -->
+      <a href="https://github.com/ChihshengJ/hover" class="back-link">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Hover PDF
+      </a>
+
+      <h1>Privacy Policy</h1>
+      <p class="effective-date">Effective date: February 27, 2026</p>
+
+      <div class="summary-box">
+        <p>
+          Hover PDF Reader does not collect, store, or transmit any user data.
+          All document processing happens entirely on your device.
+        </p>
+      </div>
+
+      <h2>Overview</h2>
+      <p>
+        Hover PDF Reader is a browser extension that replaces Chrome's default
+        PDF viewer with an enhanced reader featuring citation previews,
+        annotations, and document navigation. This policy explains how the
+        extension handles your data.
+      </p>
+
+      <h2>Data We Collect</h2>
+      <p>
+        None. Hover PDF Reader does not collect any personal information,
+        browsing data, or document content. We have no servers, no analytics,
+        and no tracking of any kind.
+      </p>
+
+      <h2>How Your Data Is Processed</h2>
+      <p>All data processing occurs locally on your device:</p>
+      <ul>
+        <li>
+          PDF documents are fetched and rendered entirely within your browser
+          using a local WebAssembly engine. No document content ever leaves your
+          device.
+        </li>
+        <li>
+          Your preferences (such as enable/disable state, wallpaper settings,
+          and display options) are stored locally using Chrome's built-in
+          storage APIs and your browser's localStorage. These are never
+          transmitted externally.
+        </li>
+        <li>
+          Authentication cookies for paywalled or institutional PDFs are used
+          only by your browser to download the PDF from its original source. The
+          extension never reads, stores, or transmits your credentials.
+        </li>
+      </ul>
+
+      <h2>Permissions Explained</h2>
+      <p>
+        The extension requests certain browser permissions solely to function as
+        a PDF viewer replacement:
+      </p>
+      <ul>
+        <li>
+          <strong>Tabs</strong> — Used to redirect the current tab from a raw
+          PDF to the Hover viewer, and to locate open viewer tabs when toggling
+          the extension.
+        </li>
+        <li>
+          <strong>Storage</strong> — Used to save your enable/disable preference
+          locally so it persists across browser sessions.
+        </li>
+        <li>
+          <strong>Web Request</strong> — Used to detect PDF responses by reading
+          content-type headers, enabling the local WASM engine to pre-load for
+          faster rendering. No requests are modified.
+        </li>
+        <li>
+          <strong>Host Permissions (all URLs)</strong> — Required because PDFs
+          can be hosted on any domain. The extension must be able to intercept
+          PDF navigations universally, just like Chrome's built-in PDF viewer.
+        </li>
+      </ul>
+
+      <h2>Third-Party Services</h2>
+      <p>
+        When you use the citation lookup feature, the extension sends your
+        search query to Google Scholar on your behalf to retrieve citation
+        information. These requests are made directly from your browser to
+        Google's servers — no data is routed through any intermediary server we
+        operate. Google's own privacy policy governs how they handle those
+        requests.
+      </p>
+
+      <h2>Data Sharing</h2>
+      <p>
+        We do not share any data with third parties because we do not collect
+        any data in the first place. There are no analytics providers,
+        advertising networks, or data brokers involved.
+      </p>
+
+      <h2>Changes to This Policy</h2>
+      <p>
+        If this policy is updated, the changes will be posted on this page with
+        a revised effective date. Since we collect no data, changes are
+        unlikely, but we will communicate any material changes through the
+        extension's update notes.
+      </p>
+
+      <hr class="divider" />
+
+      <div class="contact-section">
+        <p>
+          Questions about this policy? Reach out at
+          <a href="mailto:chihsheng3421@gmail.com">chihsheng3421@gmail.com</a>
+          or open an issue on
+          <a href="https://github.com/ChihshengJ/hover">GitHub</a>.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
