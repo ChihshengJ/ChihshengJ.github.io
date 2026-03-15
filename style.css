@@ -359,10 +359,6 @@ a:hover {
   transition: filter var(--duration-normal) var(--ease-out-quad);
 }
 
-.profile-pic:hover {
-  filter: grayscale(0%) contrast(1);
-}
-
 .about-content {
   flex: 1;
 }
