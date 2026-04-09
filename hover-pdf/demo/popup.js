@@ -20,8 +20,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       enabled,
     });
 
-    // If disabling and a PDF is currently open in Hover, redirect to the
-    // original PDF URL so the browser's native reader takes over.
     if (!enabled && response?.currentPdfUrl) {
       const tabs = await chrome.tabs.query({
         active: true,
@@ -30,7 +28,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       const activeTab = tabs[0];
 
       if (activeTab?.url?.includes(chrome.runtime.getURL(""))) {
-        // Redirect to the original PDF URL
         chrome.tabs.update(activeTab.id, { url: response.currentPdfUrl });
       }
     }
@@ -39,6 +36,58 @@ document.addEventListener("DOMContentLoaded", async () => {
   openPdfBtn.addEventListener("click", () => {
     fileInput.click();
   });
+
+  const openTabBtn = document.getElementById("open-tab-btn");
+
+  openTabBtn.addEventListener("click", async () => {
+    try {
+      const [tab] = await chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
+      if (!tab?.url) return;
+
+      if (
+        tab.url.startsWith("chrome://") ||
+        tab.url.startsWith("chrome-extension://") ||
+        tab.url.startsWith("about:")
+      ) {
+        openTabBtn.textContent = "Cannot open this page";
+        setTimeout(() => {
+          openTabBtn.innerHTML = openTabBtnOriginalHTML;
+        }, 2000);
+        return;
+      }
+
+      openTabBtn.textContent = "Opening…";
+      openTabBtn.disabled = true;
+
+      const response = await chrome.runtime.sendMessage({
+        type: "FETCH_TAB_AS_PDF",
+        url: tab.url,
+        tabId: tab.id,
+      });
+
+      if (response?.success) {
+        window.close();
+      } else {
+        openTabBtn.textContent = response?.error || "Failed to open";
+        openTabBtn.disabled = false;
+        setTimeout(() => {
+          openTabBtn.innerHTML = openTabBtnOriginalHTML;
+        }, 2000);
+      }
+    } catch (error) {
+      console.error("Error opening tab as PDF:", error);
+      openTabBtn.textContent = "Error";
+      openTabBtn.disabled = false;
+      setTimeout(() => {
+        openTabBtn.innerHTML = openTabBtnOriginalHTML;
+      }, 2000);
+    }
+  });
+
+  const openTabBtnOriginalHTML = openTabBtn.innerHTML;
 
   fileInput.addEventListener("change", async (e) => {
     const file = e.target.files[0];
@@ -78,8 +127,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   function arrayBufferToBase64(buffer) {
     const bytes = new Uint8Array(buffer);
     let binary = "";
-    for (let i = 0; i < bytes.byteLength; i++) {
-      binary += String.fromCharCode(bytes[i]);
+    const chunkSize = 8192;
+    for (let i = 0; i < bytes.length; i += chunkSize) {
+      const chunk = bytes.subarray(i, Math.min(i + chunkSize, bytes.length));
+      binary += String.fromCharCode.apply(null, chunk);
     }
     return btoa(binary);
   }
